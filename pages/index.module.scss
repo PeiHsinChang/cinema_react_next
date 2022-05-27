@@ -19,6 +19,7 @@
   border-top: 1px solid #eaeaea;
   justify-content: center;
   align-items: center;
+  // border: 1px solid red;
 }
 
 .footer a {
@@ -112,5 +113,41 @@
   .grid {
     width: 100%;
     flex-direction: column;
+  }
+}
+
+.header {
+  height: 65px;
+
+  // border: 1px solid red;
+  display: flex;
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 100%;
+  align-items: center; /** 垂直置中 */
+  justify-content: center; /** 水平置中 */
+  background-color: gray;
+}
+
+.nav {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.navMenu {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+.body {
+  height: 1500px;
+}
+
+/** navMenu RWD */
+@media (max-width: 899px) {
+  .navMenu {
+    display: none;
   }
 }
