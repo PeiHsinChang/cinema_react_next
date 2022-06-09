@@ -3,14 +3,15 @@
  */
 
 const path = require("path");
-console.log("path", path);
-console.log("__dirname", __dirname);
-console.log("includePaths", [path.join(__dirname, "styles")]);
 
 const nextConfig = {
+  /** sass設定 */
   sassOptions: {
-    includePaths: [path.join(__dirname)],
+    includePaths: [path.join(__dirname, "styles")],
   },
+
+  /** 打包位置設定default: ./.next */
+  distDir: "build",
 };
 
 module.exports = nextConfig;

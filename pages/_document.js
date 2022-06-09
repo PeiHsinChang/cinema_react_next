@@ -7,6 +7,7 @@
  */
 
 import Document, { Html, Head, Main, NextScript } from "next/document";
+import Script from "next/script";
 
 class appDocument extends Document {
   static async getInitialProps(ctx) {
@@ -20,7 +21,7 @@ class appDocument extends Document {
     return (
       <Html lang="zh-Hant-TW">
         <Head>
-          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" />
+          <Script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" />
         </Head>
         <body>
           <Main />

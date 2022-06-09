@@ -1,4 +1,6 @@
 import Image from "next/image";
+import Link from "next/link";
+
 import React, { useEffect, useState } from "react";
 import styles from "./index.module.scss";
 import Hamburger from "../components/hamburger/hamburger";
@@ -37,8 +39,8 @@ const NavMenu = () => {
 
   return (
     <ul className={styles.navMenu}>
-      {navData.map((item) => (
-        <li>
+      {navData.map((item, index) => (
+        <li key={index}>
           <a href={item.url}>{item.title}</a>
         </li>
       ))}
@@ -46,9 +48,16 @@ const NavMenu = () => {
   );
 };
 const WebLogo = () => (
-  <a className={styles.WebLogo} href="/">
-    <img class="logo" src="./static/logo/logo_1.png" alt="回到首頁" />
-  </a>
+  <Link href="/">
+    <a className={styles.WebLogo}>
+      <Image
+        src="/static/logo/logo_1.png"
+        alt="回到首頁"
+        width={50}
+        height={50}
+      />
+    </a>
+  </Link>
 );
 
 const Home = () => {
@@ -79,17 +88,37 @@ const Home = () => {
         </div>
       </nav> */}
       <footer className={styles.footer}>
-        <div class="footer">
-          <div class="footer_col ">
+        <div className="footer">
+          <div className="footer_col ">
             <span>FOLLOW US</span>
-            <div class="icon_img">
-              <img src="./img/icon/fb.png" alt="facebook" />
-              <img src="./img/icon/ig.png" alt="instagram" />
-              <img src="./img/icon/google.png" alt="google" />
-              <img src="./img/icon/youtube.png" alt="youtube" />
+            <div className="icon_img">
+              <Image
+                src="/static/icon/fb.png"
+                alt="facebook"
+                width={50}
+                height={50}
+              />
+              <Image
+                src="/static/icon/ig.png"
+                alt="instagram"
+                width={50}
+                height={50}
+              />
+              <Image
+                src="/static/icon/google.png"
+                alt="google"
+                width={50}
+                height={50}
+              />
+              <Image
+                src="/static/icon/youtube.png"
+                alt="youtube"
+                width={50}
+                height={50}
+              />
             </div>
           </div>
-          <div class="footer_col subscribe">
+          <div className="footer_col subscribe">
             <span>SUBSCRIBE TO NEWSLETTER</span>
             <input
               type="email"
@@ -97,11 +126,19 @@ const Home = () => {
               name="email"
               placeholder="Email Address"
             />
-            <button class="button_type2">訂閱</button>
+            <button className="button_type2">訂閱</button>
           </div>
         </div>
-        <img class="logo" src="./img/logo/logo_2.png" alt="" />
-        <p class="footer_p">Copyright © 2020 桐畫劇場 all rights reserved</p>
+        <Image
+          className="logo"
+          src="/static/logo/logo_2.png"
+          alt=""
+          width={50}
+          height={50}
+        />
+        <p className="footer_p">
+          Copyright © 2020 桐畫劇場 all rights reserved
+        </p>
       </footer>
     </>
   );
