@@ -1,4 +1,4 @@
-# cinema_react
+# cinema_react_next
 
 ## Introduction
 
