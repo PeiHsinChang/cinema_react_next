@@ -7,35 +7,14 @@ import Hamburger from "../components/hamburger/hamburger";
 
 const NavMenu = () => {
   const navData = [
-    {
-      title: "購票系統",
-      url: "ticket.html",
-    },
-    {
-      title: "電影",
-      url: "movies.html",
-    },
-    {
-      title: "場次查詢",
-      url: "schedule.html",
-    },
-    {
-      title: "相關資訊",
-      url: "information.html",
-    },
-    {
-      title: "展場租借",
-      url: "activity.html",
-    },
+    { title: "購票系統", url: "ticket.html" },
+    { title: "電影", url: "movies.html" },
+    { title: "場次查詢", url: "schedule.html" },
+    { title: "相關資訊", url: "information.html" },
+    { title: "展場租借", url: "activity.html" },
   ];
 
-  useEffect(() => {
-    // try {
-    //   console.log(window?.navigator?.userAgent);
-    // } catch (error) {
-    //   console.log(error);
-    // }
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <ul className={styles.navMenu}>
