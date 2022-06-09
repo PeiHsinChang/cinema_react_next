@@ -8,7 +8,7 @@ const Hamburger = () => {
   return (
     <>
       <div className={styles.hamburgerContainer} onClick={hamburgerToggle}>
-        <div className={openMenu ? styles.hamburger : styles.cross}></div>
+        <div className={openMenu ? styles.cross : styles.hamburger}></div>
       </div>
     </>
   );
