@@ -159,18 +159,3 @@
     display: none;
   }
 }
-
-.footer {
-  border: 1px solid red;
-
-  .logo2 {
-    // display: none;
-    width: 100%;
-    border: 1px solid red;
-    @media (max-width: 899px) {
-      .navMenu {
-        display: none;
-      }
-    }
-  }
-}

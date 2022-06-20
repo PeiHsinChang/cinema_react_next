@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./hamburger.module.scss";
 
-const Hamburger = () => {
+const Hamburger = ({ isOpenModal = false }) => {
   const [openMenu, setOpenMenu] = useState(false);
   const hamburgerToggle = () => setOpenMenu(openMenu ? false : true);
 

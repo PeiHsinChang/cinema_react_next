@@ -19,7 +19,7 @@
 .hamburger::after {
   display: block;
   position: absolute;
-  background-color: #fff;
+  background-color: black;
   height: 4px;
   width: 30px;
   border-radius: 2px;
@@ -39,7 +39,7 @@
 .cross::after {
   display: flex;
   position: absolute;
-  background-color: #fff;
+  background-color: black;
   left: 10px;
   content: "";
   height: 4px;

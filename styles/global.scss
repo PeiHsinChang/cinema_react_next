@@ -24,9 +24,15 @@ li {
   display: flex;
 }
 
-// img {
-//   border: 1px solid red;
-//   // flex: auto;
-//   height: 100%;
-//   // width: 100%;
-// }
+input:focus {
+  outline: none !important;
+}
+
+span {
+  padding: 5px;
+}
+
+input {
+  border: 1px solid black;
+  border-radius: 0;
+}
