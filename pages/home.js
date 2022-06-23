@@ -28,24 +28,6 @@ const NavMenu = () => {
   );
 };
 
-const SocialImage = () => {
-  const imageData = [
-    { src: "/static/icon/fb.png", alt: "facebook" },
-    { src: "/static/icon/ig.png", alt: "instagram" },
-    { src: "/static/icon/google.png", alt: "google" },
-    { src: "/static/icon/youtube.png", alt: "youtube" },
-  ];
-  return (
-    <>
-      {imageData.map((item, index) => (
-        <div className={styles.socialImg} key={index + "_img"}>
-          <img src={item.src} alt={item.url} />
-        </div>
-      ))}
-    </>
-  );
-};
-
 const WebLogo = () => (
   <a className={styles.WebLogo}>
     <Link href="/">
@@ -54,6 +36,13 @@ const WebLogo = () => (
   </a>
 );
 
+const posters = [
+  {
+    title: "1/2的魔法",
+    content:
+      "《1/2的魔法》故事背景在現代科技已比精通魔法還方便的精靈世界，精靈、人馬、美人魚、獨",
+  },
+];
 const Home = () => {
   return (
     <>
@@ -71,7 +60,11 @@ const Home = () => {
         <div className={styles.main}>
           <div className={styles.mainBlock}>
             <div>熱門推薦</div>
-            <div className={styles.posterWrapper}></div>
+            <div className={styles.posterWrapper}>
+              <div className="poster" onclick="change(1)">
+                <img src="./img/post/Onward.jpg" alt="" />
+              </div>
+            </div>
             <div className={styles.posterContent}></div>
           </div>
           <div className={styles.mainBlock}>

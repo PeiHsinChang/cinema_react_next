@@ -48,9 +48,7 @@ const Footer = () => {
       <div className={styles.logo2}>
         <img src="/static/logo/logo_2.png" alt="/" />
       </div>
-      <span className="footer_p">
-        Copyright © {thisYear} 桐畫劇場 all rights reserved
-      </span>
+      <span>Copyright © {thisYear} 桐畫劇場 all rights reserved</span>
     </footer>
   );
 };
