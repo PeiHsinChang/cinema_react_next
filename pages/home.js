@@ -64,7 +64,21 @@ const Home = () => {
           <Hamburger isOpenModal={false} />
         </nav>
       </header>
-      <div className={styles.body}></div>
+      <div className={styles.body}>
+        <div className={styles.mainImage}>
+          <img src="/static/slider/littlewoman.jpg" />
+        </div>
+        <div className={styles.main}>
+          <div className={styles.mainBlock}>
+            <div>熱門推薦</div>
+            <div className={styles.posterWrapper}></div>
+            <div className={styles.posterContent}></div>
+          </div>
+          <div className={styles.mainBlock}>
+            <div>相關訊息</div>
+          </div>
+        </div>
+      </div>
       {/* <nav id="navbar" className={styles.nav}>
         <div class="nav">
           <div class="nav_left">

@@ -9,11 +9,8 @@
   font-size: 0.4rem;
 
   .footerWrapper {
-    flex-direction: row;
-    // border: 5px solid yellow;
+    // flex-direction: row;
     .footerBox {
-      // border: 1px solid red;
-      display: flex;
       flex-direction: column;
       .socialBox {
         display: flex;
