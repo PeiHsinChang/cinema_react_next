@@ -28,3 +28,8 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+### 使用 next <Image />
+
+在圖片 width 與 height 設置上，花了不少時間了解，才知道 height 跟 width 用來決定圖片的`比例` ，
+參考文件: https://ithelp.ithome.com.tw/articles/10281104
