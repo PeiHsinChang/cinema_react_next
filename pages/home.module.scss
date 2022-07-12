@@ -134,11 +134,14 @@
   align-items: center;
   justify-content: space-between;
   color: black;
-  border: 1px solid red;
   background-color: rgba(239, 238, 237);
   .WebLogo {
-    img {
-      height: 100%;
+    border: 1px solid red;
+    .test {
+      border: 1px solid green;
+      height: 65px;
+      width: 130px;
+      position: relative;
     }
   }
 }
@@ -180,10 +183,13 @@
 }
 
 .posterWrapper {
+  border: 1px solid green;
+
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
   .poster {
+    border: 1px solid blue;
     width: 100px;
   }
 }

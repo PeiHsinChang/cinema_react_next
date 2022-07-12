@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import Onward from "../static/post/Onward.jpg";
+import logo1 from "../static/logo/logo_1.png";
 
 import React, { useEffect, useState } from "react";
 import styles from "./home.module.scss";
@@ -32,14 +32,18 @@ const NavMenu = () => {
 
 const WebLogo = () => (
   <a className={styles.WebLogo}>
-    <Link href="/">
-      <Image
-        src="/static/logo/logo_1.png"
-        alt="回到首頁"
-        width={2}
-        height={1}
-      />
-    </Link>
+    <div className={styles.test}>
+      <Link href="/">
+        <Image
+          src={logo1}
+          layout="fill"
+          alt="回到首頁"
+          width={100}
+          height={50}
+          objectFit="contain"
+        />
+      </Link>
+    </div>
   </a>
 );
 
