@@ -86,14 +86,17 @@ const Home = () => {
               {posters &&
                 posters.map((item, index) => {
                   return (
-                    <div className={styles.poster} onClick={() => {}}>
+                    <div
+                      key={index}
+                      className={styles.poster}
+                      onClick={() => {}}
+                    >
                       <Image
                         src={item.src}
                         alt={item.title}
                         layout="responsive"
                         width={3}
                         height={4}
-                        key={index}
                       />
                     </div>
                   );
