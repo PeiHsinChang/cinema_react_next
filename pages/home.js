@@ -17,7 +17,7 @@ const NavMenu = () => {
     { title: "展場租借", url: "activity.html" },
   ];
 
-  // useEffect(() => {}, []);
+  useEffect(() => {}, []);
 
   return (
     <ul className={styles.navMenu}>
