@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import Onward from "../static/post/Onward.jpg";
+
 import React, { useEffect, useState } from "react";
 import styles from "./home.module.scss";
 import Hamburger from "../components/hamburger/hamburger";
@@ -15,7 +17,7 @@ const NavMenu = () => {
     { title: "展場租借", url: "activity.html" },
   ];
 
-  useEffect(() => {}, []);
+  // useEffect(() => {}, []);
 
   return (
     <ul className={styles.navMenu}>
@@ -41,8 +43,17 @@ const posters = [
     title: "1/2的魔法",
     content:
       "《1/2的魔法》故事背景在現代科技已比精通魔法還方便的精靈世界，精靈、人馬、美人魚、獨",
+    src: "/static/post/Onward.jpg",
+  },
+  {
+    title: "1995",
+    content:
+      "《1/2的魔法》故事背景在現代科技已比精通魔法還方便的精靈世界，精靈、人馬、美人魚、獨",
+    src: "/static/post/1995.jpg",
   },
 ];
+
+// getStaticProps;
 const Home = () => {
   return (
     <>
@@ -55,15 +66,33 @@ const Home = () => {
       </header>
       <div className={styles.body}>
         <div className={styles.mainImage}>
-          <img src="/static/slider/littlewoman.jpg" />
+          <Image
+            src="/static/slider/littlewoman.jpg"
+            alt="littlewoman"
+            layout="responsive"
+            width={100}
+            height={50}
+          />
         </div>
         <div className={styles.main}>
           <div className={styles.mainBlock}>
             <div>熱門推薦</div>
             <div className={styles.posterWrapper}>
-              <div className="poster" onclick="change(1)">
-                <img src="./img/post/Onward.jpg" alt="" />
-              </div>
+              {posters &&
+                posters.map((item, index) => {
+                  return (
+                    <div className={styles.poster} onClick={() => {}}>
+                      <Image
+                        src={item.src}
+                        alt={item.title}
+                        layout="responsive"
+                        width={3}
+                        height={4}
+                        key={index}
+                      />
+                    </div>
+                  );
+                })}
             </div>
             <div className={styles.posterContent}></div>
           </div>

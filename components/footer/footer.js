@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Image from "next/image";
 import styles from "./footer.module.scss";
 
 const SocialImage = () => {
@@ -12,7 +13,13 @@ const SocialImage = () => {
     <>
       {imageData.map((item, index) => (
         <div className={styles.socialImg} key={index + "_img"}>
-          <img src={item.src} alt={item.url} />
+          <Image
+            src={item.src}
+            alt={item.url}
+            layout="responsive"
+            width={50}
+            height={50}
+          />
         </div>
       ))}
     </>
@@ -46,7 +53,13 @@ const Footer = () => {
         </div>
       </div>
       <div className={styles.logo2}>
-        <img src="/static/logo/logo_2.png" alt="/" />
+        <Image
+          src="/static/logo/logo_2.png"
+          alt="/"
+          layout="responsive"
+          width={50}
+          height={50}
+        />
       </div>
       <span>Copyright © {thisYear} 桐畫劇場 all rights reserved</span>
     </footer>
