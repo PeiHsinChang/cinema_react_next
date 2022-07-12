@@ -6,7 +6,7 @@ import logo1 from "../static/logo/logo_1.png";
 import React, { useEffect, useState } from "react";
 import styles from "./home.module.scss";
 import Hamburger from "../components/hamburger/hamburger";
-import Footer from "../components/Footer/Footer";
+import Footer from "../components/footer/footer";
 
 const NavMenu = () => {
   const navData = [
