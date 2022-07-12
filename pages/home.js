@@ -33,7 +33,12 @@ const NavMenu = () => {
 const WebLogo = () => (
   <a className={styles.WebLogo}>
     <Link href="/">
-      <img src="/static/logo/logo_1.png" alt="回到首頁" />
+      <Image
+        src="/static/logo/logo_1.png"
+        alt="回到首頁"
+        width={2}
+        height={1}
+      />
     </Link>
   </a>
 );
