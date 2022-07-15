@@ -44,9 +44,8 @@
 
 .alertModal {
   // border: 2px solid red;
-  // position: fixed;
   display: none;
-
+  position: fixed;
   height: 100vh;
   width: 100%;
   z-index: 1;

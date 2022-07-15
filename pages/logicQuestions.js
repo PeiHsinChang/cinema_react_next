@@ -69,19 +69,16 @@ const LogicQuestions = () => {
   const [isOpenModal, setIsOpenModal] = useState(true);
 
   useEffect(() => {
-    console.log("isOpenModal", isOpenModal);
     const modalAlert = document.getElementById("modalAlert");
     if (isOpenModal) {
-      modalAlert.style.display = "fixed";
+      modalAlert.style.display = "block";
     } else {
       modalAlert.style.display = "none";
     }
   }, [isOpenModal]);
 
   const choiceAnswer = (index) => {
-    console.log("choiceAnswer");
     setIsOpenModal(true);
-    // const isCorrect = (index + 1).toString() === data[questionIndex].answer;
     setIsCorrect(
       (index + 1).toString() === data[questionIndex].answer ? true : false
     );
@@ -91,6 +88,7 @@ const LogicQuestions = () => {
       setQuestionIndex(questionIndex + 1);
       if (isFinish) {
         alert("恭喜你都答對了！笨胖！");
+
         setQuestionIndex(0);
       }
     } else {
