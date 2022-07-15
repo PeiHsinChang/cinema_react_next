@@ -78,7 +78,6 @@ const LogicQuestions = () => {
   }, [isOpenModal]);
 
   const choiceAnswer = (index) => {
-    setIsOpenModal(true);
     setIsCorrect(
       (index + 1).toString() === data[questionIndex].answer ? true : false
     );
@@ -88,15 +87,13 @@ const LogicQuestions = () => {
       setQuestionIndex(questionIndex + 1);
       if (isFinish) {
         alert("恭喜你都答對了！笨胖！");
-
         setQuestionIndex(0);
+        return;
       }
-    } else {
-      // alert("incorrect!");
     }
+    setIsOpenModal(true);
   };
   const closeModalAlert = () => {
-    console.log("closeModalAlert");
     setIsOpenModal(false);
   };
   return (
