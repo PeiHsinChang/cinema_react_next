@@ -1,14 +1,86 @@
 .container {
   padding: 4rem 2rem;
   min-height: 100vh;
-  // padding: 4rem 0;
   flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 
-// .main {
+.questionBlock {
+  box-shadow: 0 5px 20px rgb(0 0 0 / 7%);
+  padding: 16px;
+  .question {
+    // border: 1px solid red;
+    color: #333333;
+    font-weight: 700;
+    letter-spacing: normal;
+    /** text-align 主要的用途用於文字的水平對齊 */
+    text-align: justify;
+    span {
+      font-weight: 900;
+    }
+  }
+  .answers {
+    padding-top: 16px;
+    .answer {
+      font-size: 10px;
+      font-weight: 500;
+      color: #333333;
+      border: 2px solid #f28500;
+      box-shadow: 0 2px 2px rgba(242, 133, 0, 0.3);
+      padding: 8px;
+      margin: 8px;
+      border-radius: 5px;
+    }
+    .answer:active {
+      background-color: #f28500;
+      color: white;
+    }
+  }
+}
 
-// }
+.alertModal {
+  // border: 2px solid red;
+  // position: fixed;
+  display: none;
+
+  height: 100vh;
+  width: 100%;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.5);
+  /** 毛玻璃效果 */
+  backdrop-filter: blur(1px);
+}
+.alertBox {
+  // border: 2px solid red;
+  margin: 50% auto;
+  background-color: #ffffff;
+  width: 70%;
+  // height: 20vh;
+  border-radius: 10px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  padding: 16px auto;
+  align-items: center;
+}
+
+.icon {
+  // border: 1px solid red;
+  width: 100px;
+  margin-bottom: 16px;
+  // margin: 16px auto;
+}
+
+.button {
+  // border: 1px solid red;
+  width: 80%;
+  text-align: center;
+  padding: 8px;
+  background-color: #f28500;
+  color: white;
+  border-radius: 5px;
+}

@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react";
+import Image from "next/image";
+
 import styles from "./logicQuestions.module.scss";
+import Correct from "../static/correct.svg";
+import Error from "../static/error.svg";
 
 const data = [
   {
@@ -60,37 +64,76 @@ const data = [
 ];
 
 const LogicQuestions = () => {
-  const [questionInde, setQuestionIndex] = useState(0);
+  const [questionIndex, setQuestionIndex] = useState(0);
+  const [isCorrect, setIsCorrect] = useState(false);
+  const [isOpenModal, setIsOpenModal] = useState(true);
 
+  useEffect(() => {
+    console.log("isOpenModal", isOpenModal);
+    const modalAlert = document.getElementById("modalAlert");
+    if (isOpenModal) {
+      modalAlert.style.display = "fixed";
+    } else {
+      modalAlert.style.display = "none";
+    }
+  }, [isOpenModal]);
+
+  const choiceAnswer = (index) => {
+    console.log("choiceAnswer");
+    setIsOpenModal(true);
+    // const isCorrect = (index + 1).toString() === data[questionIndex].answer;
+    setIsCorrect(
+      (index + 1).toString() === data[questionIndex].answer ? true : false
+    );
+    const isFinish = questionIndex + 1 === data.length;
+
+    if (isCorrect) {
+      setQuestionIndex(questionIndex + 1);
+      if (isFinish) {
+        alert("恭喜你都答對了！笨胖！");
+        setQuestionIndex(0);
+      }
+    } else {
+      // alert("incorrect!");
+    }
+  };
+  const closeModalAlert = () => {
+    console.log("closeModalAlert");
+    setIsOpenModal(false);
+  };
   return (
     <div className={styles.container}>
-      <div>第{data[questionInde].question_id}題</div>
-      <div>{data[questionInde].question}</div>
-      {data[questionInde].answers.map((item, index) => {
-        console.log(item);
-
-        return (
-          <div
-            key={index}
-            onClick={() => {
-              const isCorrect =
-                (index + 1).toString() === data[questionInde].answer;
-              const isFinish = questionInde + 1 === data.length;
-
-              if (isCorrect) {
-                setQuestionIndex(questionInde + 1);
-                if (isFinish) {
-                  alert("恭喜你都答對了！笨胖！");
-                  setQuestionIndex(0);
-                }
-              } else {
-                alert("incorrect!");
-              }
-              console.log(isFinish, questionInde + 1, data.length);
-            }}
-          >{`${index + 1} ${item}`}</div>
-        );
-      })}
+      <div className={styles.alertModal} id="modalAlert">
+        <div className={styles.alertBox}>
+          <div className={styles.icon}>
+            <Image
+              src={isCorrect ? Correct : Error}
+              alt="littlewoman"
+              layout="responsive"
+            />
+          </div>
+          <div className={styles.button} onClick={() => closeModalAlert()}>
+            {isCorrect ? "下一題" : "重新作答"}
+          </div>
+        </div>
+      </div>
+      <div className={styles.questionBlock}>
+        <div className={styles.question}>
+          <span>Q{data[questionIndex].question_id}.</span>
+          {data[questionIndex].question}
+        </div>
+        <div className={styles.answers}>
+          {data[questionIndex].answers.map((item, index) => {
+            return (
+              <div
+                className={styles.answer}
+                key={index}
+                onClick={() => choiceAnswer(index)}
+              >{`${index + 1}. ${item}`}</div>
+            );
+          })}
+        </div>
+      </div>
     </div>
   );
 };
