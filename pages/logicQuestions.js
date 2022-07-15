@@ -66,7 +66,7 @@ const data = [
 const LogicQuestions = () => {
   const [questionIndex, setQuestionIndex] = useState(0);
   const [isCorrect, setIsCorrect] = useState(false);
-  const [isOpenModal, setIsOpenModal] = useState(true);
+  const [isOpenModal, setIsOpenModal] = useState(false);
 
   useEffect(() => {
     const modalAlert = document.getElementById("modalAlert");
