@@ -1,51 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import logo1 from "../static/logo/logo_1.png";
-
 import React, { useEffect, useState } from "react";
 import styles from "./home.module.scss";
-import Hamburger from "../components/hamburger/hamburger";
+import NavigationBar from "../components/header/header";
+
 import Footer from "../components/footer/footer";
-
-const NavMenu = () => {
-  const navData = [
-    { title: "購票系統", url: "ticket.html" },
-    { title: "電影", url: "movies.html" },
-    { title: "場次查詢", url: "schedule.html" },
-    { title: "相關資訊", url: "information.html" },
-    { title: "展場租借", url: "activity.html" },
-  ];
-
-  useEffect(() => {}, []);
-
-  return (
-    <ul className={styles.navMenu}>
-      {navData.map((item, index) => (
-        <li key={index}>
-          <a href={item.url}>{item.title}</a>
-        </li>
-      ))}
-    </ul>
-  );
-};
-
-const WebLogo = () => (
-  <a className={styles.WebLogo}>
-    <div className={styles.test}>
-      <Link href="/">
-        <Image
-          src={logo1}
-          layout="fill"
-          alt="回到首頁"
-          width={100}
-          height={50}
-          objectFit="contain"
-        />
-      </Link>
-    </div>
-  </a>
-);
 
 const posters = [
   {
@@ -62,17 +22,10 @@ const posters = [
   },
 ];
 
-// getStaticProps;
 const Home = () => {
   return (
     <>
-      <header className={styles.header}>
-        <nav className={styles.nav}>
-          <WebLogo />
-          <NavMenu />
-          <Hamburger isOpenModal={false} />
-        </nav>
-      </header>
+      <NavigationBar />
       <div className={styles.body}>
         <div className={styles.mainImage}>
           <Image
@@ -113,21 +66,6 @@ const Home = () => {
           </div>
         </div>
       </div>
-      {/* <nav id="navbar" className={styles.nav}>
-        <div class="nav">
-          <div class="nav_left">
-            <a href="index.html">
-              <img class="logo" src="./img/logo/logo_1.png" alt="回到首頁" />
-            </a>
-          </div>
-          <div class="nav_right">
-            <NavList />
-          </div>
-        </div>
-        <div id="panel">
-          <NavList />
-        </div>
-      </nav> */}
       <Footer />
     </>
   );
