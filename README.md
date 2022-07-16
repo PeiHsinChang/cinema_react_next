@@ -33,3 +33,8 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 在圖片 width 與 height 設置上，花了不少時間了解，才知道 height 跟 width 用來決定圖片的`比例` ，
 參考文件: https://ithelp.ithome.com.tw/articles/10281104
+
+### 問題選項
+
+利用 react 元件製作一個問答小遊戲
+參考文件: https://cinema-react-next-peihsinchang.vercel.app/logicQuestions
