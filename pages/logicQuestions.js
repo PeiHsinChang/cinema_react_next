@@ -96,7 +96,7 @@ const LogicQuestions = () => {
         return prevState + 1;
       });
     }
-    if (isFinish) {
+    if (isCorrect && isFinish) {
       setAlertContent("");
       setQuestionIndex(0);
     }
