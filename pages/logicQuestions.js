@@ -73,7 +73,7 @@ const LogicQuestions = () => {
 
     const modalAlert = document.getElementById("modalAlert");
     if (isOpenModal) {
-      modalAlert.style.display = "block";
+      modalAlert.style.display = "flex";
     } else {
       modalAlert.style.display = "none";
     }

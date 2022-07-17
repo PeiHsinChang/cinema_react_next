@@ -43,7 +43,6 @@
 }
 
 .alertModal {
-  // border: 2px solid red;
   display: none;
   position: fixed;
   height: 100vh;
@@ -52,9 +51,11 @@
   background-color: rgba(0, 0, 0, 0.5);
   /** 毛玻璃效果 */
   backdrop-filter: blur(1px);
+  align-items: center;
+  justify-content: center;
 }
 .alertBox {
-  margin: 50% auto;
+  margin: 0 auto;
   padding: 16px 0;
   background-color: #ffffff;
   width: 70%;
@@ -65,14 +66,12 @@
 }
 
 .icon {
-  // border: 1px solid red;
   width: 100px;
   margin-bottom: 16px;
   // margin: 16px auto;
 }
 
 .button {
-  // border: 1px solid red;
   width: 80%;
   text-align: center;
   padding: 8px;
