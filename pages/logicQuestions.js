@@ -69,24 +69,25 @@ const LogicQuestions = () => {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [alertContent, setAlertContent] = useState("");
   useEffect(() => {
+    const isFinish = questionIndex + 1 === data.length;
+
     const modalAlert = document.getElementById("modalAlert");
     if (isOpenModal) {
       modalAlert.style.display = "block";
     } else {
       modalAlert.style.display = "none";
     }
-  }, [isCorrect, isOpenModal]);
-
-  const choiceAnswer = (index) => {
-    const isFinish = questionIndex + 1 === data.length;
-    setIsOpenModal(true);
-    setIsCorrect(
-      (index + 1).toString() === data[questionIndex].answer ? true : false
-    );
 
     if (isCorrect && isFinish) {
       setAlertContent("恭喜你都答對了！");
     }
+  }, [isCorrect, isOpenModal]);
+
+  const choiceAnswer = (index) => {
+    setIsOpenModal(true);
+    setIsCorrect(
+      (index + 1).toString() === data[questionIndex].answer ? true : false
+    );
   };
   const closeModalAlert = () => {
     const isFinish = questionIndex + 1 === data.length;
@@ -100,8 +101,8 @@ const LogicQuestions = () => {
       setAlertContent("");
       setQuestionIndex(0);
     }
+    setIsCorrect(false);
   };
-  console.log("questionIndex", questionIndex);
   return (
     <div className={styles.container}>
       <div className={styles.alertModal} id="modalAlert">
@@ -113,7 +114,9 @@ const LogicQuestions = () => {
               layout="responsive"
             />
           </div>
-          <div className={styles.alertContent}>{alertContent}</div>
+          <div className={styles.alertContent}>
+            {alertContent ? alertContent : ""}
+          </div>
           <div className={styles.button} onClick={closeModalAlert}>
             {isCorrect ? "下一題" : "重新作答"}
           </div>
