@@ -83,17 +83,22 @@ const LogicQuestions = () => {
     setIsCorrect(
       (index + 1).toString() === data[questionIndex].answer ? true : false
     );
+
     if (isCorrect && isFinish) {
-      setAlertContent("恭喜你都答對了！笨胖！");
-      setQuestionIndex(0);
+      setAlertContent("恭喜你都答對了！");
     }
   };
   const closeModalAlert = () => {
+    const isFinish = questionIndex + 1 === data.length;
     setIsOpenModal(false);
     if (isCorrect) {
       setQuestionIndex((prevState) => {
         return prevState + 1;
       });
+    }
+    if (isFinish) {
+      setAlertContent("");
+      setQuestionIndex(0);
     }
   };
   console.log("questionIndex", questionIndex);
