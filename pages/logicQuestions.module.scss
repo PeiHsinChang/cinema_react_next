@@ -12,8 +12,8 @@
 .questionBlock {
   box-shadow: 0 5px 20px rgb(0 0 0 / 7%);
   padding: 16px;
+
   .question {
-    // border: 1px solid red;
     color: #333333;
     font-weight: 700;
     letter-spacing: normal;
@@ -73,15 +73,41 @@
 
 .button {
   width: 80%;
+  min-width: 100px;
   text-align: center;
   padding: 8px;
   background-color: #f28500;
   color: white;
   border-radius: 5px;
 }
-
+.unClick {
+  background-color: #909fa6;
+  color: white;
+}
 .alertContent {
   padding: 16px;
   color: #333333;
   font-weight: 500;
+}
+
+.page2Content {
+  border: 1px solid green;
+}
+
+.card {
+  // border: 1px solid red;
+  position: relative;
+}
+
+div.card:nth-child(even) {
+  // position: absolute;
+  // left: -10%;
+  background: black;
+  background: radial-gradient(#1fe4f5, #3fbafe);
+}
+div.card:nth-child(odd) {
+  // position: absolute;
+  // left: 10%;
+  background: red;
+  background: radial-gradient(#60efbc, #58d5c9);
 }

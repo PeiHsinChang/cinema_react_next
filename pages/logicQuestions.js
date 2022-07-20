@@ -64,13 +64,18 @@ const data = [
 ];
 
 const LogicQuestions = () => {
+  const [page, setPage] = useState(1);
   const [questionIndex, setQuestionIndex] = useState(0);
   const [isCorrect, setIsCorrect] = useState(false);
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [alertContent, setAlertContent] = useState("");
-  useEffect(() => {
-    const isFinish = questionIndex + 1 === data.length;
+  const [isFinish, setIsFinish] = useState(false);
 
+  /** 領取獎勵 */
+  const [getGift, setGetGift] = useState(false);
+
+  useEffect(() => {
+    setIsFinish(questionIndex + 1 === data.length);
     const modalAlert = document.getElementById("modalAlert");
     if (isOpenModal) {
       modalAlert.style.display = "flex";
@@ -89,8 +94,9 @@ const LogicQuestions = () => {
       (index + 1).toString() === data[questionIndex].answer ? true : false
     );
   };
+
   const closeModalAlert = () => {
-    const isFinish = questionIndex + 1 === data.length;
+    /** 1. 關閉modal 2.重新 */
     setIsOpenModal(false);
     if (isCorrect) {
       setQuestionIndex((prevState) => {
@@ -100,9 +106,77 @@ const LogicQuestions = () => {
     if (isCorrect && isFinish) {
       setAlertContent("");
       setQuestionIndex(0);
+      setGetGift(true);
+      setPage(page + 1);
     }
     setIsCorrect(false);
   };
+
+  let pageContent = null;
+  switch (page) {
+    case 1:
+      pageContent = (
+        <div className={styles.button} onClick={() => setPage(page + 1)}>
+          開始挑戰
+        </div>
+      );
+      break;
+    case 2:
+      pageContent = (
+        <>
+          <div className={styles.page2Content}>
+            {data &&
+              data.map((item, index) => {
+                return (
+                  <div key={index} className={styles.card}>
+                    <div>{item.question}</div>
+                    <div>{item.answers[parseInt(item.answer) - 1]}</div>
+                  </div>
+                );
+              })}
+          </div>
+          <div className={styles.button} onClick={() => setPage(page + 1)}>
+            開始作答
+          </div>
+        </>
+      );
+      break;
+    case 3:
+      pageContent = (
+        <>
+          <div className={styles.question}>
+            <span>Q{data[questionIndex].question_id}.</span>
+            {data[questionIndex].question}
+          </div>
+          <div className={styles.answers}>
+            {data[questionIndex].answers.map((item, index) => {
+              return (
+                <div
+                  className={styles.answer}
+                  key={index}
+                  onClick={() => choiceAnswer(index)}
+                >{`${index + 1}. ${item}`}</div>
+              );
+            })}
+          </div>
+        </>
+      );
+      break;
+    case 4:
+      pageContent = (
+        <div
+          className={`${styles.button} ${getGift ? styles.unClick : null}`}
+          onClick={getGift ? () => {} : () => setGetGift(true)}
+        >
+          {getGift ? "已領取獎勵" : "領取獎勵"}
+        </div>
+      );
+      break;
+
+    default:
+      pageContent;
+  }
+
   return (
     <div className={styles.container}>
       <div className={styles.alertModal} id="modalAlert">
@@ -118,27 +192,11 @@ const LogicQuestions = () => {
             {alertContent ? alertContent : ""}
           </div>
           <div className={styles.button} onClick={closeModalAlert}>
-            {isCorrect ? "下一題" : "重新作答"}
+            {isCorrect ? (isFinish ? "領取獎勵！" : "下一題") : "重新作答"}
           </div>
         </div>
       </div>
-      <div className={styles.questionBlock}>
-        <div className={styles.question}>
-          <span>Q{data[questionIndex].question_id}.</span>
-          {data[questionIndex].question}
-        </div>
-        <div className={styles.answers}>
-          {data[questionIndex].answers.map((item, index) => {
-            return (
-              <div
-                className={styles.answer}
-                key={index}
-                onClick={() => choiceAnswer(index)}
-              >{`${index + 1}. ${item}`}</div>
-            );
-          })}
-        </div>
-      </div>
+      <div className={styles.questionBlock}>{pageContent}</div>
     </div>
   );
 };
