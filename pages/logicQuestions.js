@@ -95,8 +95,9 @@ const LogicQuestions = () => {
       refsList.map((item, index) => {
         setTimeout(() => {
           refs.current = refs[item];
+          console.log((index + 1) * 2000);
           refs.current.style.opacity = "1";
-        }, (index + 1) * 2000);
+        }, index * 1500);
       });
     }
   }, [isCorrect, isOpenModal, page, refs]);

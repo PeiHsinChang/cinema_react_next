@@ -148,7 +148,7 @@ div.card:nth-child(even) {
   background: radial-gradient(#1fe4f5, #3fbafe);
 
   animation-name: rightFlyIn;
-  animation-duration: 3s;
+  animation-duration: 1.5s;
   left: 50px;
 }
 
@@ -156,17 +156,17 @@ div.card:nth-child(odd) {
   background: radial-gradient(#60efbc, #58d5c9);
 
   animation-name: leftFlyIn;
-  animation-duration: 3s;
+  animation-duration: 1.5s;
   left: -50px;
 }
 
 @keyframes leftFlyIn {
   from {
-    // opacity: 0;
+    opacity: 0;
     left: -100%;
   }
   to {
-    // opacity: 1;
+    opacity: 1;
     left: -50px;
   }
 }
@@ -174,10 +174,12 @@ div.card:nth-child(odd) {
 @keyframes rightFlyIn {
   from {
     opacity: 0;
+
     left: 100%;
   }
   to {
     opacity: 1;
+
     left: 50px;
   }
 }
