@@ -96,7 +96,7 @@ const LogicQuestions = () => {
         setTimeout(() => {
           refs.current = refs[item];
           refs.current.style.opacity = "1";
-        }, index * 1000);
+        }, index * 500);
       });
     }
   }, [isCorrect, isOpenModal, page, refs]);
