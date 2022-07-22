@@ -70,6 +70,7 @@ const LogicQuestions = () => {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [alertContent, setAlertContent] = useState("");
   const [isFinish, setIsFinish] = useState(false);
+  const [showAnimation, setShowAnimation] = useState(0);
 
   /** 領取獎勵 */
   const [getGift, setGetGift] = useState(false);
@@ -86,6 +87,14 @@ const LogicQuestions = () => {
     if (isCorrect && isFinish) {
       setAlertContent("恭喜你都答對了！");
     }
+
+    // for (let i = 1; i < 5; i++) {
+    //   Promise.then(
+    //     setTimeout(() => {
+    //       console.log("setInterval" + i);
+    //     }, 3000)
+    //   );
+    // }
   }, [isCorrect, isOpenModal]);
 
   const choiceAnswer = (index) => {
@@ -177,10 +186,30 @@ const LogicQuestions = () => {
       pageContent;
   }
 
+  const closeModal = (e) => {
+    console.log("closeModal");
+    if (isCorrect) {
+      setQuestionIndex((prevState) => {
+        return prevState + 1;
+      });
+    }
+    if (isCorrect && isFinish) {
+      setAlertContent("");
+      // setGetGift(true);
+      setPage(page + 1);
+    }
+    setIsCorrect(false);
+    setIsOpenModal(false);
+  };
+
   return (
     <div className={styles.container}>
-      <div className={styles.alertModal} id="modalAlert">
-        <div className={styles.alertBox}>
+      <div
+        className={styles.alertModal}
+        id="modalAlert"
+        onClick={(e) => closeModal(e)}
+      >
+        <div className={styles.alertBox} onClick={(e) => e.stopPropagation()}>
           <div className={styles.icon}>
             <Image
               src={isCorrect ? Correct : Error}

@@ -5,7 +5,7 @@
 const path = require("path");
 
 const nextConfig = {
-  /** sass設定 */
+  /** 如果要使用sass，需加上這段設定 */
   sassOptions: {
     includePaths: [path.join(__dirname, "styles")],
   },

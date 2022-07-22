@@ -16,7 +16,7 @@ const Boxes = ({ boxCount, clickCount, onClick }) => {
           console.log(document.getElementById(e.target.id).innerHTML);
         }}
       >
-        {clickCount}
+        {/* {clickCount} */}
       </div>
     );
   };
