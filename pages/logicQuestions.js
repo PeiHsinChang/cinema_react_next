@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 
 import styles from "./logicQuestions.module.scss";
@@ -70,11 +70,11 @@ const LogicQuestions = () => {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [alertContent, setAlertContent] = useState("");
   const [isFinish, setIsFinish] = useState(false);
-  const [showAnimation, setShowAnimation] = useState(0);
 
   /** 領取獎勵 */
   const [getGift, setGetGift] = useState(false);
 
+  const refs = useRef(null);
   useEffect(() => {
     setIsFinish(questionIndex + 1 === data.length);
     const modalAlert = document.getElementById("modalAlert");
@@ -88,14 +88,18 @@ const LogicQuestions = () => {
       setAlertContent("恭喜你都答對了！");
     }
 
-    // for (let i = 1; i < 5; i++) {
-    //   Promise.then(
-    //     setTimeout(() => {
-    //       console.log("setInterval" + i);
-    //     }, 3000)
-    //   );
-    // }
-  }, [isCorrect, isOpenModal]);
+    if (refs) {
+      const refsList = Object.keys(refs);
+      refsList.pop(1);
+      /** animation 出場時間 */
+      refsList.map((item, index) => {
+        setTimeout(() => {
+          refs.current = refs[item];
+          refs.current.style.opacity = "1";
+        }, index * 1000);
+      });
+    }
+  }, [isCorrect, isOpenModal, page, refs]);
 
   const choiceAnswer = (index) => {
     setIsOpenModal(true);
@@ -142,9 +146,7 @@ const LogicQuestions = () => {
                     key={index}
                     style={{ animationDelay: `${delay}s` }}
                     className={`${styles.card} `}
-                    ref={(node) => {
-                      console.log(node);
-                    }}
+                    ref={(el) => (refs[index] = el)}
                   >
                     <div>{item.question}</div>
                     <div>{item.answers[parseInt(item.answer) - 1]}</div>
@@ -195,7 +197,6 @@ const LogicQuestions = () => {
   }
 
   const closeModal = (e) => {
-    console.log("closeModal");
     if (isCorrect) {
       setQuestionIndex((prevState) => {
         return prevState + 1;
@@ -209,6 +210,7 @@ const LogicQuestions = () => {
     setIsCorrect(false);
     setIsOpenModal(false);
   };
+  console.log("render");
 
   return (
     <div className={styles.container}>
