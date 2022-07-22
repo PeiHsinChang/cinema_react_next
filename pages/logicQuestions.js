@@ -136,8 +136,16 @@ const LogicQuestions = () => {
           <div className={styles.page2Content}>
             {data &&
               data.map((item, index) => {
+                const delay = index;
                 return (
-                  <div key={index} className={styles.card}>
+                  <div
+                    key={index}
+                    style={{ animationDelay: `${delay}s` }}
+                    className={`${styles.card} `}
+                    ref={(node) => {
+                      console.log(node);
+                    }}
+                  >
                     <div>{item.question}</div>
                     <div>{item.answers[parseInt(item.answer) - 1]}</div>
                   </div>

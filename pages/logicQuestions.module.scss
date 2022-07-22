@@ -107,8 +107,6 @@
   padding: 10px;
   box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
-
-  // to ease the button growth on hover
   transition: 1s;
 
   &::before {
@@ -147,33 +145,40 @@
 div.card:nth-child(even) {
   background: radial-gradient(#1fe4f5, #3fbafe);
 
-  left: 50px;
   animation-name: rightFlyIn;
   animation-duration: 3s;
+  left: 50px;
 }
 
 div.card:nth-child(odd) {
   background: radial-gradient(#60efbc, #58d5c9);
 
-  left: -50px;
   animation-name: leftFlyIn;
   animation-duration: 3s;
+  left: -50px;
+}
+.showCard {
+  opacity: 1;
 }
 
 @keyframes leftFlyIn {
   from {
+    opacity: 0;
     left: -100%;
   }
   to {
+    opacity: 1;
     left: -50px;
   }
 }
 
 @keyframes rightFlyIn {
   from {
+    opacity: 0;
     left: 100%;
   }
   to {
+    opacity: 1;
     left: 50px;
   }
 }
