@@ -128,9 +128,11 @@ const LogicQuestions = () => {
             {data &&
               data.map((item, index) => {
                 return (
-                  <div key={index} className={styles.card}>
-                    <div>{item.question}</div>
-                    <div>{item.answers[parseInt(item.answer) - 1]}</div>
+                  <div key={index} className={styles.cardContainer}>
+                    <div className={styles.card}>
+                      <div>{item.question}</div>
+                      <div>{item.answers[parseInt(item.answer) - 1]}</div>
+                    </div>
                   </div>
                 );
               })}
