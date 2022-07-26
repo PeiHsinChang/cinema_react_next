@@ -14,6 +14,7 @@
   flex-direction: column;
   align-items: center;
 
+  width: 100%;
   box-shadow: 0 5px 20px rgb(0 0 0 / 7%);
   padding: 16px;
   .question {
@@ -98,10 +99,14 @@
 
 .page2Content {
   // border: 1px solid green;
+  border: 1px solid yellow;
+  width: 100%;
 }
 
-.card {
-  // border: 1px solid red;
+.cardContainer {
+  border: 1px solid red;
+  width: 80%;
+  height: 50px;
   position: relative;
   margin: 10px 10px;
   padding: 10px;
@@ -141,6 +146,12 @@
       transform: translateX(700px) skewX(-15deg);
       transition: 2s;
     }
+  }
+  .card {
+    border: 1px solid green;
+    position: absolute;
+    // left: 50px;
+    border-radius: 5px;
   }
 }
 
