@@ -7,7 +7,7 @@ const Boxes = ({ boxCount, onClick, boxNumbers }) => {
     return (
       <div
         id={`box${index}`}
-        className={`${styles.box} ${styles.boxStyle}`}
+        className={`${styles.box} `}
         onClick={(e) => onClick(e, index)}
       >
         {boxNumbers[index] ? boxNumbers[index] : ""}
@@ -40,7 +40,6 @@ const PuzzleGame = () => {
   const [rowSum, setRowSum] = useState(initialArray(num));
 
   useEffect(() => {
-    console.log("useEffect");
     /** 直的加總 */
     const newColumnSum = boxNumbers.reduce(
       (accum, item, index, array) => {
@@ -78,7 +77,7 @@ const PuzzleGame = () => {
     setRowSum(newRowSum);
 
     return () => {
-      console.log("Child unmounted");
+      console.log("unmounted");
     };
   }, [clickCount, clickBoxId]);
 
@@ -101,7 +100,7 @@ const PuzzleGame = () => {
                   setBoxNumbers(boxNumbers);
                 }}
               >
-                <div>{item ? item : ""}</div>
+                <div className={`${styles.yellow}`}>{item ? item : ""}</div>
               </div>
             );
           })}
@@ -112,9 +111,9 @@ const PuzzleGame = () => {
               <div
                 id={`rowSum${rowSumIndex}`}
                 key={`rowSum${rowSumIndex}`}
-                className={`${styles.box} ${styles.boxStyle}`}
+                className={`${styles.box} ${styles.orange}`}
               >
-                <div>{item ? item : ""}</div>
+                <div className={`${styles.orange}`}>{item ? item : ""}</div>
               </div>
             );
           })}
@@ -127,13 +126,13 @@ const PuzzleGame = () => {
               <div
                 id={`columnSum${columnSumIndex}`}
                 key={`columnSum${columnSumIndex}`}
-                className={`${styles.box} ${styles.boxStyle}`}
+                className={styles.box}
               >
-                <div>{item ? item : ""}</div>
+                <div className={`${styles.green}`}>{item ? item : ""}</div>
               </div>
             );
           })}
-          <div className={`${styles.box} ${styles.boxStyle}`}></div>
+          <div className={styles.box}></div>
         </div>
       </div>
     </div>
