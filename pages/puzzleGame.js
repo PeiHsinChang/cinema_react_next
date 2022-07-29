@@ -1,67 +1,141 @@
 import React, { useEffect, useState } from "react";
 import styles from "./PuzzleGame.module.scss";
 
-const Boxes = ({ boxCount, clickCount, onClick, boxNumbers }) => {
+const Boxes = ({ boxCount, onClick, boxNumbers }) => {
   let boxes = [];
   const BoxComponent = ({ index }) => {
     return (
       <div
         id={`box${index}`}
-        className={styles.box}
-        onClick={(e) => {
-          document.getElementById(e.target.id).innerHTML = clickCount;
-          console.log("index", index);
-          onClick(e, index);
-          console.log("ddd", boxNumbers);
-        }}
+        className={`${styles.box} ${styles.boxStyle}`}
+        onClick={(e) => onClick(e, index)}
       >
-        {/* {clickCount} */}
-        {boxNumbers?.[index]}
+        {boxNumbers[index] ? boxNumbers[index] : ""}
       </div>
     );
   };
+
   for (let i = 0; i < boxCount; i++) {
-    boxes.push(<BoxComponent index={i} key={`box${i}`}></BoxComponent>);
+    boxes.push(<BoxComponent index={i} key={`box${i}`} />);
   }
   return boxes;
 };
 
+const initialArray = (number) => {
+  let initialBoxNumberArray = [];
+  for (let i = 0; i < number; i++) {
+    initialBoxNumberArray.push(0);
+  }
+  return initialBoxNumberArray;
+};
+
 const PuzzleGame = () => {
-  let boxCount = Math.pow(3, 2);
-  let initialBoxNumbers = () => {
-    console.log("eeeeee");
-    let initialBoxNumberArray = [];
-    for (let i = 0; i < boxCount; i++) {
-      initialBoxNumberArray.push(0);
-    }
-    return initialBoxNumberArray;
-  };
+  let num = 3;
+  let boxCount = Math.pow(num, 2);
+
   const [clickCount, setClickCount] = useState(0);
   const [clickBoxId, setClickBoxId] = useState(0);
-  const [boxNumbers, setBoxNumbers] = useState(initialBoxNumbers);
+  const [boxNumbers, setBoxNumbers] = useState(initialArray(boxCount));
+  const [columnSum, setColumnSum] = useState(initialArray(num));
+  const [rowSum, setRowSum] = useState(initialArray(num));
 
   useEffect(() => {
-    if (clickBoxId) {
-      console.log(document.getElementById(clickBoxId));
-      document.getElementById(clickBoxId).innerHTML = clickCount;
-    }
-  }, [clickCount, clickBoxId]);
-  return (
-    <div>
-      map
-      <Boxes
-        boxCount={boxCount}
-        clickCount={clickCount}
-        boxNumbers={boxNumbers}
-        onClick={(e, index, boxNumbers) => {
-          console.log("e", e);
-          console.log("index2222", boxNumbers);
-          setClickBoxId(e.target.id);
-          setClickCount(clickCount + 1);
+    console.log("useEffect");
+    /** 直的加總 */
+    const newColumnSum = boxNumbers.reduce(
+      (accum, item, index, array) => {
+        if (parseInt(index / 3) === 0) {
+          accum[index % 3] += item;
+        } else {
+          if (accum[index % 3] && item) {
+            accum[index % 3] += item;
+          } else {
+            accum[index % 3] = 0;
+          }
+        }
+        return accum;
+      },
+      [0, 0, 0]
+    );
+    setColumnSum(newColumnSum);
 
-          setBoxNumbers(boxNumbers?.[index]);
-        }}
-      />
+    /** 橫的加總 */
+    const newRowSum = boxNumbers.reduce(
+      (accum, item, index, array) => {
+        if (index % 3 === 0) {
+          accum[parseInt(index / 3)] += item;
+        } else {
+          if (accum[parseInt(index / 3)] && item) {
+            accum[parseInt(index / 3)] += item;
+          } else {
+            accum[parseInt(index / 3)] = 0;
+          }
+        }
+        return accum;
+      },
+      [0, 0, 0]
+    );
+    setRowSum(newRowSum);
+
+    return () => {
+      console.log("Child unmounted");
+    };
+  }, [clickCount, clickBoxId]);
+
+  return (
+    <div className={styles.container}>
+      <div className={styles.containerByRow}>
+        <div className={styles.boxWrapper}>
+          {boxNumbers.map((item, boxIndex) => {
+            return (
+              <div
+                id={`box${boxIndex}`}
+                className={`${styles.box}`}
+                key={`box${boxIndex}`}
+                onClick={(e) => {
+                  setClickBoxId(e.target.id);
+                  if (!boxNumbers[boxIndex]) {
+                    setClickCount(clickCount + 1);
+                    boxNumbers[boxIndex] = clickCount + 1;
+                  }
+                  setBoxNumbers(boxNumbers);
+                }}
+              >
+                <div>{item ? item : ""}</div>
+              </div>
+            );
+          })}
+        </div>
+        <div className={styles.rowSumWrapper}>
+          {rowSum.map((item, rowSumIndex) => {
+            return (
+              <div
+                id={`rowSum${rowSumIndex}`}
+                key={`rowSum${rowSumIndex}`}
+                className={`${styles.box} ${styles.boxStyle}`}
+              >
+                <div>{item ? item : ""}</div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+      <div className={styles.containerByRow}>
+        <div className={styles.columnSumWrapper}>
+          {columnSum.map((item, columnSumIndex) => {
+            return (
+              <div
+                id={`columnSum${columnSumIndex}`}
+                key={`columnSum${columnSumIndex}`}
+                className={`${styles.box} ${styles.boxStyle}`}
+              >
+                <div>{item ? item : ""}</div>
+              </div>
+            );
+          })}
+          <div className={`${styles.box} ${styles.boxStyle}`}></div>
+        </div>
+      </div>
     </div>
   );
 };
