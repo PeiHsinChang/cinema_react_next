@@ -95,9 +95,10 @@ const LogicQuestions = () => {
       refsList.map((item, index) => {
         setTimeout(() => {
           refs.current = refs[item];
-          console.log((index + 1) * 2000);
-          refs.current.style.opacity = "1";
-        }, index * 1500);
+          if (refs.current?.style) {
+            refs.current.style.opacity = "1";
+          }
+        }, index * 1000);
       });
     }
   }, [isCorrect, isOpenModal, page, refs]);

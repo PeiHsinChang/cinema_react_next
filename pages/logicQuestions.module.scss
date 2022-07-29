@@ -13,8 +13,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  width: 100%;
   box-shadow: 0 5px 20px rgb(0 0 0 / 7%);
   padding: 16px;
   .question {
@@ -97,22 +95,15 @@
   font-weight: 500;
 }
 
-.page2Content {
-  // border: 1px solid green;
-  border: 1px solid yellow;
-  width: 100%;
-}
-
-.cardContainer {
-  border: 1px solid red;
-  width: 80%;
-  height: 50px;
+.card {
+  // border: 1px solid red;
+  border-radius: 5px;
   position: relative;
   margin: 10px 10px;
   padding: 10px;
   box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
-  transition: 0.5s;
+  transition: 2s;
   opacity: 0;
 
   /** 閃爍 */
@@ -144,14 +135,8 @@
     &::before,
     &::after {
       transform: translateX(700px) skewX(-15deg);
-      transition: 2s;
+      transition: 1s;
     }
-  }
-  .card {
-    border: 1px solid green;
-    position: absolute;
-    // left: 50px;
-    border-radius: 5px;
   }
 }
 
