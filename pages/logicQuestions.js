@@ -97,6 +97,7 @@ const LogicQuestions = () => {
           refs.current = refs[item];
           if (refs.current?.style) {
             refs.current.style.opacity = "1";
+            refs.current.style.animationDelay = `${index}s`;
           }
         }, index * 1000);
       });
@@ -142,11 +143,11 @@ const LogicQuestions = () => {
           <div className={styles.page2Content}>
             {data &&
               data.map((item, index) => {
-                const delay = index;
+                // const delay = index;
                 return (
                   <div
                     key={index}
-                    style={{ animationDelay: `${delay}s` }}
+                    // style={{ animationDelay: `${delay}s` }}
                     className={`${styles.card} `}
                     ref={(el) => (refs[index] = el)}
                   >
