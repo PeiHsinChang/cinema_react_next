@@ -1,0 +1,27 @@
+.container {
+  box-sizing: border-box;
+  padding: 4rem 2rem;
+  min-height: 100vh;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  * {
+    box-sizing: border-box;
+  }
+}
+
+.card {
+  border: 1px solid red;
+  width: 70px;
+  height: 70px;
+  transform: 0;
+  background-color: orange;
+}
+
+.card::after {
+  content: "";
+  width: 70px;
+  height: 70px;
+}

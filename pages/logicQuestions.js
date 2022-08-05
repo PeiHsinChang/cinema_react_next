@@ -88,20 +88,32 @@ const LogicQuestions = () => {
       setAlertContent("恭喜你都答對了！");
     }
 
+    const handleTransitionEnd = (e) => {
+      e.target.style.opacity = "1";
+    };
     if (refs) {
       const refsList = Object.keys(refs);
       refsList.pop(1);
       /** animation 出場時間 */
-      refsList.map((item, index) => {
-        setTimeout(() => {
-          refs.current = refs[item];
-          if (refs.current?.style) {
-            refs.current.style.opacity = "1";
-            // refs.current.style.animationDelay = `${index}s`;
-          }
-        }, index * 1500);
+      refsList.forEach((item) => {
+        refs.current = refs[item];
+        if (refs.current?.style) {
+          refs.current.addEventListener("animationend", handleTransitionEnd);
+        }
       });
     }
+
+    return () => {
+      const refsList = Object.keys(refs);
+      refsList.pop(1);
+      /** animation 出場時間卸載animationend */
+      refsList.forEach((item) => {
+        refs.current = refs[item];
+        if (refs.current?.style) {
+          refs.current.removeEventListener("animationend", handleTransitionEnd);
+        }
+      });
+    };
   }, [isCorrect, isOpenModal, page, refs]);
 
   const choiceAnswer = (index) => {
