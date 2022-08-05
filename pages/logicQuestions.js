@@ -99,7 +99,7 @@ const LogicQuestions = () => {
       refsList.forEach((item) => {
         refs.current = refs[item];
         if (refs.current?.style) {
-          refs.current.addEventListener("animationend", handleTransitionEnd);
+          refs.current.addEventListener("animationstart", handleTransitionEnd);
         }
       });
     }
