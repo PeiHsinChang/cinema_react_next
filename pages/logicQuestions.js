@@ -91,6 +91,7 @@ const LogicQuestions = () => {
     const handleTransitionEnd = (e) => {
       e.target.style.opacity = "1";
     };
+
     if (refs) {
       const refsList = Object.keys(refs);
       refsList.pop(1);
