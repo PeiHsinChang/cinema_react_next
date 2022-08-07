@@ -7,21 +7,54 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  * {
-    box-sizing: border-box;
-  }
+  // * {
+  //   box-sizing: border-box;
+  // }
 }
 
 .card {
-  border: 1px solid red;
+  position: relative;
+  display: flex;
   width: 70px;
   height: 70px;
-  transform: 0;
   background-color: orange;
 }
 
+.card:hover {
+  transform: rotateY(360deg);
+}
+
 .card::after {
-  content: "";
+  position: absolute;
+  display: flex;
+  background-color: green;
+  transform: rotateY(-180deg);
+  content: "2";
   width: 70px;
   height: 70px;
 }
+
+.card,
+.card::after:hover {
+  // transform: rotateY(0deg);
+  backface-visibility: hidden;
+  transform: rotateY(180deg);
+  transition: transform 1s;
+  transform-style: preserve-3d;
+}
+
+.card:hover,
+.card::after {
+  transform: rotateY(360deg);
+  backface-visibility: hidden;
+  transition: transform 1s;
+  transform-style: preserve-3d;
+}
+
+//https://codepen.io/kayfo23/pen/KoZOzB
+// https://freefrontend.com/css-flip-cards/
+// https://freefrontend.com/css-cards/
+// https://levelup.gitconnected.com/css-gallery-layouts-c46089309bb
+
+// https://www.oxxostudio.tw/articles/201706/pseudo-element-1.html
+// https://medium.com/@anshumishra1168/11-advanced-react-interview-questions-you-should-absolutely-know-with-detailed-answers-4e86b5823162
