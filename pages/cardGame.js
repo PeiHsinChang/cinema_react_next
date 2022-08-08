@@ -21,18 +21,23 @@ console.log("test", test);
 
 const Cards = ({ data }) => {
   const [cardClassName, setCardClassName] = useState(`${styles.card}`);
+  const [cardsData, setCardsData] = useState([]);
+
   console.log("Cards", data);
   const clickCard = (value) => {
-    console.log(value.target.innerHTML);
-    console.log(value.target.innerText);
+    console.log(value.target.dataset.value);
     setCardClassName((cardClassName += ` ${styles.clickCard}`));
   };
-  const card = (value, index) => (
-    <div key={index} className={cardClassName} onClick={(e) => clickCard(e)}>
-      {value.value}
+  const card = (data, index) => (
+    <div
+      key={index}
+      className={cardClassName}
+      onClick={(e) => clickCard(e)}
+      data-value={data.value}
+    >
+      {data.value}
     </div>
   );
-  // return <></>;
   return data.map((item, index) => card(item, index));
 };
 function cardGame({ data }) {
