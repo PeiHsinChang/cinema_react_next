@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import styles from "./cardGame.module.scss";
 
 function quickSort(arr) {
@@ -18,26 +19,45 @@ function quickSort(arr) {
 const test = quickSort([48, 44, 22, 99, 77, 32]);
 console.log("test", test);
 
-const data = [{ value: 1 }, { value: 2 }, { value: 3 }];
-const data2 = [...data, ...data];
-
-// var arr = [4, 1, 67, 12, 45, 121, 3];
-data2.sort(function () {
-  return 0.5 - Math.random();
-});
-console.log(data2);
-
-const card = <div className={styles.card}>1</div>;
-const Cards = () => {
-  // return data2.map((item) => card);
-  return card;
-};
-const cardGame = () => {
-  return (
-    <div className={styles.container}>
-      <Cards />
+const Cards = ({ data }) => {
+  const [cardClassName, setCardClassName] = useState(`${styles.card}`);
+  console.log("Cards", data);
+  const clickCard = (value) => {
+    console.log(value.target.innerHTML);
+    console.log(value.target.innerText);
+    setCardClassName((cardClassName += ` ${styles.clickCard}`));
+  };
+  const card = (value, index) => (
+    <div key={index} className={cardClassName} onClick={(e) => clickCard(e)}>
+      {value.value}
     </div>
   );
+  // return <></>;
+  return data.map((item, index) => card(item, index));
 };
+function cardGame({ data }) {
+  console.log("cardGame", data);
+  return (
+    <div className={styles.container}>
+      <Cards data={data} />
+    </div>
+  );
+}
+
+export async function getServerSideProps() {
+  // Fetch data from external API
+  // const res = await fetch(`https://.../data`);
+  // const data = await res.json();
+  let data = [{ value: 1 }, { value: 2 }, { value: 3 }];
+  let data2 = [...data, ...data];
+
+  data2.sort(() => {
+    return 0.5 - Math.random();
+  });
+  console.log(data2);
+
+  // Pass data to the page via props
+  return { props: { data: data2 } };
+}
 
 export default cardGame;

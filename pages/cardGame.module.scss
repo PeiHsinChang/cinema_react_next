@@ -18,38 +18,45 @@
   width: 70px;
   height: 70px;
   background-color: orange;
-}
-
-.card:hover {
-  transform: rotateY(360deg);
+  // opacity: 0;
+  // transform: rotateY(180deg);
+  visibility: hidden;
 }
 
 .card::after {
   position: absolute;
   display: flex;
   background-color: green;
-  transform: rotateY(-180deg);
+  // transform: rotateY(-180deg);
   content: "2";
   width: 70px;
   height: 70px;
+  // opacity: 1;
+  visibility: visible;
 }
+.clickCard {
+  visibility: visible;
+}
+.clickCard::after {
+  visibility: hidden;
+}
+// .card,
+// .card::after:hover {
+//   // transform: rotateY(0deg);
+//   backface-visibility: hidden;
+//   // transform: rotateY(-180deg);
+//   transition: transform 1s;
+//   transform: rotateY(0deg);
+//   transform-style: preserve-3d;
+// }
 
-.card,
-.card::after:hover {
-  // transform: rotateY(0deg);
-  backface-visibility: hidden;
-  transform: rotateY(180deg);
-  transition: transform 1s;
-  transform-style: preserve-3d;
-}
-
-.card:hover,
-.card::after {
-  transform: rotateY(360deg);
-  backface-visibility: hidden;
-  transition: transform 1s;
-  transform-style: preserve-3d;
-}
+// .card:hover,
+// .card::after {
+//   transform: rotateY(180deg);
+//   backface-visibility: hidden;
+//   transition: transform 1s;
+//   transform-style: preserve-3d;
+// }
 
 //https://codepen.io/kayfo23/pen/KoZOzB
 // https://freefrontend.com/css-flip-cards/
