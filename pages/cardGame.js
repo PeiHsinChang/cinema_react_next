@@ -37,8 +37,8 @@ const Cards = ({ data }) => {
       console.log("isMatchCards", isMatchCards);
       setMatchValue("");
 
-      const newCardsData = cardsData
-        .filter((item) => item.value == matchValue)
+      cardsData
+        .filter((item) => item.isOpen)
         .map((item) => {
           isMatchCards ? (item.isMatch = true) : (item.isOpen = false);
           // matchValue ? "" : (item.isOpen = false);
@@ -46,7 +46,9 @@ const Cards = ({ data }) => {
             ...item,
           };
         });
+      console.log("selectData", selectData);
       setSelectData([]);
+      // cardsData.filter((item) => (item.isOpen = false));
     }
   }, [cardsData, selectData]);
 
@@ -57,7 +59,7 @@ const Cards = ({ data }) => {
     /** setCardsData不可以使用直接放cardsData，要[...cardsData] */
     setCardsData([...cardsData]);
 
-    setOpenCardsCount((openCardsCount += 1));
+    // setOpenCardsCount((openCardsCount += 1));
     selectData.push(value);
     setSelectData(selectData);
     if (selectData.length == 1) setMatchValue(value);
