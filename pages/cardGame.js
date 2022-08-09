@@ -16,11 +16,10 @@ function quickSort(arr) {
   return [...quickSort(left), p, ...quickSort(right)];
 }
 
-const test = quickSort([48, 44, 22, 99, 77, 32]);
+// const test = quickSort([48, 44, 22, 99, 77, 32]);
 
 const Cards = ({ data }) => {
   const [cardsData, setCardsData] = useState(data);
-  const [openCardsCount, setOpenCardsCount] = useState(0);
   const [matchValue, setMatchValue] = useState("");
   const [selectData, setSelectData] = useState([]);
 
@@ -29,8 +28,6 @@ const Cards = ({ data }) => {
 
   useEffect(() => {
     if (selectData.length === 2) {
-      // setOpenCardsCount(0);
-
       /** 1. 先filter isOpen = true
        *  2. 是否match? isMatch的style: isOpen的style */
       const isMatchCards = selectData.every((item) => item === matchValue);
@@ -41,14 +38,10 @@ const Cards = ({ data }) => {
         .filter((item) => item.isOpen)
         .map((item) => {
           isMatchCards ? (item.isMatch = true) : (item.isOpen = false);
-          // matchValue ? "" : (item.isOpen = false);
-          return {
-            ...item,
-          };
+          return { ...item };
         });
       console.log("selectData", selectData);
       setSelectData([]);
-      // cardsData.filter((item) => (item.isOpen = false));
     }
   }, [cardsData, selectData]);
 
@@ -59,7 +52,6 @@ const Cards = ({ data }) => {
     /** setCardsData不可以使用直接放cardsData，要[...cardsData] */
     setCardsData([...cardsData]);
 
-    // setOpenCardsCount((openCardsCount += 1));
     selectData.push(value);
     setSelectData(selectData);
     if (selectData.length == 1) setMatchValue(value);
