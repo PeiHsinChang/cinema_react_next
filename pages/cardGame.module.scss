@@ -29,6 +29,7 @@
   position: absolute; /* 絕對定位使兩個div重疊 */
   backface-visibility: hidden; /* 元素背後不可看見 */
   transition: 2s; /*動畫時間 1.5秒*/
+  // transition-duration: 2s;
 }
 
 .front {

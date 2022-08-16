@@ -30,7 +30,7 @@ const Cards = ({ data }) => {
 
   const clickCard = (data) => {
     const { cardIndex, value } = data.target.dataset;
-    /** Deep copy */
+    /** Deep Copy */
     let setNewCardsData = JSON.parse(JSON.stringify(cardsData));
     const setNewCardData = setNewCardsData[parseInt(cardIndex)];
     setNewCardData.isOpen = true;
@@ -41,8 +41,9 @@ const Cards = ({ data }) => {
   };
 
   const card = (data, index) => {
-    const handleTransitionEnd = () => {
+    const handleTransitionEnd = (e) => {
       if (data.isOpen && selectData.length === 2) {
+        console.log("handleTransitionEnd", index, data);
         /** 1. 先filter isOpen = true
          *  2. 是否match ? isMatch的style: isOpen的style */
         // console.log("selectData", selectData);
@@ -51,14 +52,17 @@ const Cards = ({ data }) => {
 
         setNewCardsData.map((item) => {
           if (item.isOpen) {
-            isMatchCards ? (item.isMatch = true) : (item.isOpen = false);
+            if (isMatchCards) {
+              item.isMatch = true;
+            } else {
+              item.isMatch = false;
+              item.isOpen = false;
+            }
           }
         });
+        setCardsData(setNewCardsData);
 
         setSelectData([]);
-        // setTimeout(() => {
-        setCardsData(setNewCardsData);
-        // }, 50);
       }
     };
     return (
