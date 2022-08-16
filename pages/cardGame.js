@@ -30,11 +30,10 @@ const Cards = ({ data }) => {
 
   const clickCard = (data) => {
     const { cardIndex, value } = data.target.dataset;
+    /** Deep copy */
     let setNewCardsData = JSON.parse(JSON.stringify(cardsData));
     const setNewCardData = setNewCardsData[parseInt(cardIndex)];
-    // const cardData = cardsData[];
     setNewCardData.isOpen = true;
-    /** setCardsData不可以使用直接放cardsData，要[...cardsData] */
     setCardsData(setNewCardsData);
 
     selectData.push(value);
@@ -48,8 +47,6 @@ const Cards = ({ data }) => {
          *  2. 是否match ? isMatch的style: isOpen的style */
         // console.log("selectData", selectData);
         const isMatchCards = selectData[0] === selectData[1];
-        // console.log("index", index);
-        // let setNewCardsData = Object.assign([], cardsData);
         let setNewCardsData = JSON.parse(JSON.stringify(cardsData));
 
         setNewCardsData.map((item) => {
@@ -57,11 +54,11 @@ const Cards = ({ data }) => {
             isMatchCards ? (item.isMatch = true) : (item.isOpen = false);
           }
         });
-        // console.log(setNewCardsData);
+
         setSelectData([]);
-        setTimeout(() => {
-          setCardsData(setNewCardsData);
-        }, 50);
+        // setTimeout(() => {
+        setCardsData(setNewCardsData);
+        // }, 50);
       }
     };
     return (
