@@ -88,7 +88,7 @@ const LogicQuestions = () => {
       setAlertContent("恭喜你都答對了！");
     }
 
-    const handleTransitionEnd = (e) => {
+    const handleTransitionStart = (e) => {
       e.target.style.opacity = "1";
     };
 
@@ -99,7 +99,10 @@ const LogicQuestions = () => {
       refsList.forEach((item) => {
         refs.current = refs[item];
         if (refs.current?.style) {
-          refs.current.addEventListener("animationstart", handleTransitionEnd);
+          refs.current.addEventListener(
+            "animationstart",
+            handleTransitionStart
+          );
         }
       });
     }
@@ -111,7 +114,10 @@ const LogicQuestions = () => {
       refsList.forEach((item) => {
         refs.current = refs[item];
         if (refs.current?.style) {
-          refs.current.removeEventListener("animationend", handleTransitionEnd);
+          refs.current.removeEventListener(
+            "animationend",
+            handleTransitionStart
+          );
         }
       });
     };
