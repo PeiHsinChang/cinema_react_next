@@ -92,7 +92,12 @@ const Cards = ({ data }) => {
     );
   };
   // return card(data[0]);
-  return cardsData.map((item, index) => card(item, index));
+
+  return (
+    <div className={styles.playground}>
+      {cardsData.map((item, index) => card(item, index))}
+    </div>
+  );
 };
 
 function cardGame({ data }) {

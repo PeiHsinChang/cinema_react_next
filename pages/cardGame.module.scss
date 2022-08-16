@@ -1,8 +1,17 @@
 .container {
   position: relative;
   box-sizing: border-box;
-  padding: auto 2rem;
-  // min-height: 70vh;
+  padding: 2rem;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.playground {
+  width: 100%;
+  border: 1px solid red;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -16,10 +25,11 @@
   // min-width: 100px;
   // min-height: 150px;
   aspect-ratio: 2/3; /* 寬/長 */
-  margin: 10px;
+  margin: 5px;
   flex: 1 1 25%;
   transform: perspective(1000px);
   perspective: 1000px; /* 立體透視深度 */
+  border-radius: 5px;
 }
 
 .front,
@@ -36,7 +46,7 @@
   transform: rotateY(0deg);
   /** background: color image attachment repeat poition / size */
   /** background教學: https://ithelp.ithome.com.tw/articles/10250499 */
-  background: red url("../static/OnePiece/OnePieceCover.jpeg") no-repeat center /
+  background: grey url("../static/OnePiece/OnePieceCover.jpeg") no-repeat center /
     cover;
 }
 
