@@ -24,18 +24,12 @@ function quickSort(arr) {
 
 const Cards = ({ data }) => {
   const [cardsData, setCardsData] = useState(data);
-  const [matchValue, setMatchValue] = useState("");
   const [selectData, setSelectData] = useState([]);
 
   const clickCardStyle = styles.clickCard;
   const ref = useRef(null);
 
-  useEffect(() => {
-    console.log("useEffect");
-  }, [cardsData, selectData, ref]);
-
   const clickCard = (data) => {
-    // console.log("data.parentElement");
     ref.current = data.target.parentElements;
     const { cardIndex, value } = data.target.dataset;
 
@@ -46,23 +40,22 @@ const Cards = ({ data }) => {
 
     selectData.push(value);
     setSelectData(selectData);
-    if (selectData.length == 1) setMatchValue(value);
   };
 
   const card = (data, index) => {
-    const handleTransitionEnd = () => {
+    const handleTransitionEnd = (e) => {
       if (data.isOpen && selectData.length === 2) {
         /** 1. 先filter isOpen = true
          *  2. 是否match ? isMatch的style: isOpen的style */
-        const isMatchCards = selectData.every((item) => item === matchValue);
+        const isMatchCards = selectData[0] === selectData[1];
+        let setNewCardsData = Object.assign([], cardsData);
 
-        setMatchValue("");
-        cardsData
-          .filter((item) => item.isOpen)
-          .map((item) => {
+        setNewCardsData.map((item) => {
+          if (item.isOpen) {
             isMatchCards ? (item.isMatch = true) : (item.isOpen = false);
-            return { ...item };
-          });
+          }
+        });
+        setCardsData(setNewCardsData);
         setSelectData([]);
       }
     };
@@ -73,7 +66,7 @@ const Cards = ({ data }) => {
         onClick={(e) =>
           data.isOpen || selectData.length === 2 ? () => {} : clickCard(e)
         }
-        onTransitionEnd={() => handleTransitionEnd()}
+        onTransitionEnd={(e) => handleTransitionEnd(e)}
       >
         <div
           className={styles.front}
@@ -109,17 +102,12 @@ export async function getServerSideProps() {
   // const res = await fetch(`https://.../data`);
   const res = await fetch(`${server}/api/filenames`);
   const filenames = await res.json();
+  filenames.sort(() => 0.5 - Math.random());
   const newFilenames = filenames.slice(0, 3);
-  console.log("data3", newFilenames);
   let data = newFilenames.map((filename, index) => {
     return { value: index, filename: filename, isOpen: false, isMatch: false };
   });
-  console.log(data);
-  // let data = [
-  //   { value: 1, isOpen: false, isMatch: false },
-  //   { value: 2, isOpen: false, isMatch: false },
-  //   { value: 3, isOpen: false, isMatch: false },
-  // ];
+
   let data2 = [...data, ...data];
 
   data2.sort(() => {
