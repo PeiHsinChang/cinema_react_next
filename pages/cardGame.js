@@ -27,36 +27,41 @@ const Cards = ({ data }) => {
   const [selectData, setSelectData] = useState([]);
 
   const clickCardStyle = styles.clickCard;
-  const ref = useRef(null);
 
   const clickCard = (data) => {
-    ref.current = data.target.parentElements;
     const { cardIndex, value } = data.target.dataset;
-
-    const cardData = cardsData[parseInt(cardIndex)];
-    cardData.isOpen = true;
+    let setNewCardsData = JSON.parse(JSON.stringify(cardsData));
+    const setNewCardData = setNewCardsData[parseInt(cardIndex)];
+    // const cardData = cardsData[];
+    setNewCardData.isOpen = true;
     /** setCardsData不可以使用直接放cardsData，要[...cardsData] */
-    setCardsData([...cardsData]);
+    setCardsData(setNewCardsData);
 
     selectData.push(value);
     setSelectData(selectData);
   };
 
   const card = (data, index) => {
-    const handleTransitionEnd = (e) => {
+    const handleTransitionEnd = () => {
       if (data.isOpen && selectData.length === 2) {
         /** 1. 先filter isOpen = true
          *  2. 是否match ? isMatch的style: isOpen的style */
+        // console.log("selectData", selectData);
         const isMatchCards = selectData[0] === selectData[1];
-        let setNewCardsData = Object.assign([], cardsData);
+        // console.log("index", index);
+        // let setNewCardsData = Object.assign([], cardsData);
+        let setNewCardsData = JSON.parse(JSON.stringify(cardsData));
 
         setNewCardsData.map((item) => {
           if (item.isOpen) {
             isMatchCards ? (item.isMatch = true) : (item.isOpen = false);
           }
         });
-        setCardsData(setNewCardsData);
+        // console.log(setNewCardsData);
         setSelectData([]);
+        setTimeout(() => {
+          setCardsData(setNewCardsData);
+        }, 50);
       }
     };
     return (
@@ -66,7 +71,7 @@ const Cards = ({ data }) => {
         onClick={(e) =>
           data.isOpen || selectData.length === 2 ? () => {} : clickCard(e)
         }
-        onTransitionEnd={(e) => handleTransitionEnd(e)}
+        onTransitionEnd={() => handleTransitionEnd()}
       >
         <div
           className={styles.front}
