@@ -70,7 +70,7 @@ const Cards = ({ data }) => {
         key={index}
         className={`${styles.card} ${data.isOpen ? clickCardStyle : ""}`}
         onClick={(e) =>
-          data.isOpen || selectData.length === 2 ? () => {} : clickCard(e)
+          data.isOpen || selectData.length === 2 ? "" : clickCard(e)
         }
         onTransitionEnd={() => handleTransitionEnd()}
       >

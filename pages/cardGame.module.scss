@@ -24,11 +24,11 @@
   // min-width: 100px;
   // min-height: 150px;
   aspect-ratio: 1/1; /* 寬/長 */
-  margin: 5px;
+  margin: 3px;
   flex: 1 1 20%;
   transform: perspective(1000px);
   perspective: 1000px; /* 立體透視深度 */
-  border-radius: 5px;
+  // border-radius: 5px;
 }
 
 .front,
@@ -38,6 +38,7 @@
   position: absolute; /* 絕對定位使兩個div重疊 */
   backface-visibility: hidden; /* 元素背後不可看見 */
   transition: 1.5s; /*動畫時間 1.5秒*/
+  // border-radius: 5px;
 }
 
 .front {
