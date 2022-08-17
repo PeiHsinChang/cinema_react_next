@@ -45,8 +45,8 @@
   transform: rotateY(0deg);
   /** background: color image attachment repeat poition / size */
   /** background教學: https://ithelp.ithome.com.tw/articles/10250499 */
-  background: #c25a48 url("/../static/OnePiece/OnePieceCover.png") no-repeat
-    center / 90% 90%;
+  background: rgb(235, 229, 229) url("/../static/OnePiece/OnePieceCover.png")
+    no-repeat center / 90% 90%;
 }
 
 .back {
