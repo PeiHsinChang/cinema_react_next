@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { useEffect, useState, useRef } from "react";
 import styles from "./cardGame.module.scss";
-import cover from "../static/OnePiece/OnePieceCover.jpeg";
+// import cover from "../static/OnePiece/OnePieceCover.png";
 import { server } from "../config";
 
 /** 快速排序法
@@ -84,8 +84,8 @@ const Cards = ({ data }) => {
             src={`/static/OnePiece/${data.filename}`}
             alt={data.filename}
             layout="responsive"
-            width={2}
-            height={3}
+            width={1}
+            height={1}
           />
         </div>
       </div>
@@ -114,7 +114,7 @@ export async function getServerSideProps() {
   const res = await fetch(`${server}/api/filenames`);
   const filenames = await res.json();
   filenames.sort(() => 0.5 - Math.random());
-  const newFilenames = filenames.slice(0, 3);
+  const newFilenames = filenames.slice(0, 8);
   let data = newFilenames.map((filename, index) => {
     return { value: index, filename: filename, isOpen: false, isMatch: false };
   });

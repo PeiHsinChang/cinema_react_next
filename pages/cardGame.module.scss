@@ -23,9 +23,9 @@
   position: relative;
   // min-width: 100px;
   // min-height: 150px;
-  aspect-ratio: 2/3; /* 寬/長 */
+  aspect-ratio: 1/1; /* 寬/長 */
   margin: 5px;
-  flex: 1 1 25%;
+  flex: 1 1 20%;
   transform: perspective(1000px);
   perspective: 1000px; /* 立體透視深度 */
   border-radius: 5px;
@@ -37,15 +37,14 @@
   height: 100%;
   position: absolute; /* 絕對定位使兩個div重疊 */
   backface-visibility: hidden; /* 元素背後不可看見 */
-  transition: 2s; /*動畫時間 1.5秒*/
-  // transition-duration: 2s;
+  transition: 1.5s; /*動畫時間 1.5秒*/
 }
 
 .front {
   transform: rotateY(0deg);
   /** background: color image attachment repeat poition / size */
   /** background教學: https://ithelp.ithome.com.tw/articles/10250499 */
-  background: #c25a48 url("../static/OnePiece/OnePieceCover.jpeg") no-repeat
+  background: #c25a48 url("/../static/OnePiece/OnePieceCover.png") no-repeat
     center / 90% 90%;
 }
 
