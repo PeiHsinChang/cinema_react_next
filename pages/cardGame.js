@@ -30,31 +30,9 @@ const Cards = ({ data }) => {
 
   useEffect(() => {
     if (selectData.length == 2) {
-      console.log(selectData);
-    }
-  }, [selectData]);
-
-  const clickCard = (data) => {
-    const { cardIndex, value } = data.target.dataset;
-    /** Deep Copy */
-    let setNewCardsData = JSON.parse(JSON.stringify(cardsData));
-    const setNewCardData = setNewCardsData[parseInt(cardIndex)];
-    setNewCardData.isOpen = true;
-    setCardsData(setNewCardsData);
-
-    let newSelectData = JSON.parse(JSON.stringify(selectData));
-    newSelectData.push(value);
-    setSelectData(newSelectData);
-  };
-
-  const card = (data, index) => {
-    const handleTransitionEnd = (e) => {
-      console.log(e);
-      if (data.isOpen && selectData.length === 2) {
-        // console.log("handleTransitionEnd", index, data);
-        /** 1. 先filter isOpen = true
-         *  2. 是否match ? isMatch的style: isOpen的style */
-        // console.log("selectData", selectData);
+      /** 1. 先filter isOpen = true
+       *  2. 是否match ? isMatch的style: isOpen的style */
+      setTimeout(() => {
         const isMatchCards = selectData[0] === selectData[1];
         setNewCardsData = JSON.parse(JSON.stringify(cardsData));
 
@@ -70,7 +48,48 @@ const Cards = ({ data }) => {
         });
         setCardsData(setNewCardsData);
         setSelectData([]);
-      }
+      }, 1000);
+    }
+  }, [selectData]);
+
+  const clickCard = (data) => {
+    console.log("clickCard");
+    const { cardIndex, value } = data.target.dataset;
+    /** Deep Copy */
+    setNewCardsData = JSON.parse(JSON.stringify(cardsData));
+    const setNewCardData = setNewCardsData[parseInt(cardIndex)];
+    setNewCardData.isOpen = true;
+    setCardsData(setNewCardsData);
+
+    let newSelectData = JSON.parse(JSON.stringify(selectData));
+    newSelectData.push(value);
+    setSelectData(newSelectData);
+  };
+
+  const card = (data, index) => {
+    const handleTransitionEnd = (e) => {
+      console.log(e);
+      // if (data.isOpen && selectData.length === 2) {
+      //   // console.log("handleTransitionEnd", index, data);
+      //   /** 1. 先filter isOpen = true
+      //    *  2. 是否match ? isMatch的style: isOpen的style */
+      //   // console.log("selectData", selectData);
+      //   const isMatchCards = selectData[0] === selectData[1];
+      //   setNewCardsData = JSON.parse(JSON.stringify(cardsData));
+
+      //   setNewCardsData.map((item) => {
+      //     if (item.isOpen) {
+      //       if (isMatchCards) {
+      //         item.isMatch = true;
+      //       } else {
+      //         item.isMatch = false;
+      //         item.isOpen = false;
+      //       }
+      //     }
+      //   });
+      //   setCardsData(setNewCardsData);
+      //   setSelectData([]);
+      // }
     };
     return (
       <div

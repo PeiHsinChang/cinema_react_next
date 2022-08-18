@@ -38,7 +38,7 @@
   height: 100%;
   position: absolute; /* 絕對定位使兩個div重疊 */
   backface-visibility: hidden; /* 元素背後不可看見 */
-  transition: 1.5s; /*動畫時間 1.5秒*/
+  transition: 1s; /*動畫時間 1.5秒*/
   // border-radius: 5px;
 }
 
@@ -59,6 +59,7 @@
 
 .clickCard .front {
   transform: rotateY(180deg); /*當hover時，front從正面轉到背面*/
+  transition: 1s; /*動畫時間 1.5秒*/
 }
 
 .clickCard .back {
