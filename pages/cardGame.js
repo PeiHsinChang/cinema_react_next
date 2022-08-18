@@ -25,8 +25,14 @@ function quickSort(arr) {
 const Cards = ({ data }) => {
   const [cardsData, setCardsData] = useState(data);
   const [selectData, setSelectData] = useState([]);
-
+  let setNewCardsData;
   const clickCardStyle = styles.clickCard;
+
+  useEffect(() => {
+    if (selectData.length == 2) {
+      console.log(selectData);
+    }
+  }, [selectData]);
 
   const clickCard = (data) => {
     const { cardIndex, value } = data.target.dataset;
@@ -36,19 +42,21 @@ const Cards = ({ data }) => {
     setNewCardData.isOpen = true;
     setCardsData(setNewCardsData);
 
-    selectData.push(value);
-    setSelectData(selectData);
+    let newSelectData = JSON.parse(JSON.stringify(selectData));
+    newSelectData.push(value);
+    setSelectData(newSelectData);
   };
 
   const card = (data, index) => {
     const handleTransitionEnd = (e) => {
+      console.log(e);
       if (data.isOpen && selectData.length === 2) {
-        console.log("handleTransitionEnd", index, data);
+        // console.log("handleTransitionEnd", index, data);
         /** 1. 先filter isOpen = true
          *  2. 是否match ? isMatch的style: isOpen的style */
         // console.log("selectData", selectData);
         const isMatchCards = selectData[0] === selectData[1];
-        let setNewCardsData = JSON.parse(JSON.stringify(cardsData));
+        setNewCardsData = JSON.parse(JSON.stringify(cardsData));
 
         setNewCardsData.map((item) => {
           if (item.isOpen) {
@@ -61,18 +69,19 @@ const Cards = ({ data }) => {
           }
         });
         setCardsData(setNewCardsData);
-
         setSelectData([]);
       }
     };
     return (
       <div
         key={index}
-        className={`${styles.card} ${data.isOpen ? clickCardStyle : ""}`}
+        className={`${styles.card} ${data.isOpen ? clickCardStyle : ""} ${
+          data.isMatch ? styles.matchStyle : ""
+        }`}
         onClick={(e) =>
           data.isOpen || selectData.length === 2 ? "" : clickCard(e)
         }
-        onTransitionEnd={() => handleTransitionEnd()}
+        onTransitionEnd={(e) => handleTransitionEnd(e)}
       >
         <div
           className={styles.front}
@@ -92,7 +101,6 @@ const Cards = ({ data }) => {
     );
   };
   // return card(data[0]);
-
   return (
     <div className={styles.playground}>
       {cardsData.map((item, index) => card(item, index))}
