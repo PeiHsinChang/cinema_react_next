@@ -12,6 +12,7 @@ const nextConfig = {
 
   /** 打包位置設定default: ./.next */
   distDir: "build",
+  webpack: (config) => config,
 };
 
 module.exports = nextConfig;
