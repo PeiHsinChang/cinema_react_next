@@ -4,6 +4,20 @@ import React, { useEffect, useState } from "react";
 import styles from "./index.module.scss";
 
 export default function Home() {
+  const [eventData, setEventData] = useState("");
+
+  useEffect(() => {
+    function handleMotionEvent(event) {
+      const x = event.accelerationIncludingGravity.x;
+      const y = event.accelerationIncludingGravity.y;
+      const z = event.accelerationIncludingGravity.z;
+      console.log(x + " : " + y + " : " + z);
+      setEventData(x + " : " + y + " : " + z);
+    }
+
+    window.addEventListener("devicemotion", handleMotionEvent, true);
+  }, [eventData]);
+
   return (
     <div className={styles.container}>
       <Head>
@@ -17,6 +31,7 @@ export default function Home() {
         <h1 className={styles.title}>
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
+        {"eventData" + eventData}
 
         <p className={styles.description}>
           Get started by editing{" "}
