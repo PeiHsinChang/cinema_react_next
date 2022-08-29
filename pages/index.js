@@ -21,6 +21,13 @@ export default function Home() {
     } else {
       setEventData(`你的瀏覽器不支援喔`);
     }
+
+    window.addEventListener("resize", function (event) {
+      var newWidth = window.innerWidth;
+      var newHeight = window.innerHeight;
+      console.log("newWidth", newWidth);
+      console.log("newHeight", newHeight);
+    });
   }, []);
 
   return (
