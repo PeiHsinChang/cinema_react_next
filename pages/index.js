@@ -7,16 +7,21 @@ export default function Home() {
   const [eventData, setEventData] = useState("");
 
   useEffect(() => {
-    function handleMotionEvent(event) {
-      const x = event.accelerationIncludingGravity.x;
-      const y = event.accelerationIncludingGravity.y;
-      const z = event.accelerationIncludingGravity.z;
-      console.log(x + " : " + y + " : " + z);
-      setEventData(x + " : " + y + " : " + z);
+    if (window.DeviceOrientationEvent) {
+      window.addEventListener(
+        "deviceorientation",
+        function (event) {
+          const alpha = event.alpha;
+          const beta = event.beta;
+          const gamma = event.gamma;
+          setEventData(`alpha:${alpha}, beta:${beta}, gamma:${gamma}`);
+        },
+        false
+      );
+    } else {
+      setEventData(`你的瀏覽器不支援喔`);
     }
-
-    window.addEventListener("devicemotion", handleMotionEvent, true);
-  }, [eventData]);
+  }, []);
 
   return (
     <div className={styles.container}>
