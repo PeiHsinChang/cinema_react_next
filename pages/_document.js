@@ -21,14 +21,14 @@ class appDocument extends Document {
     return (
       <Html lang="zh-Hant-TW">
         <Head></Head>
-        <Script language="javascript">
+        {/* <Script language="javascript">
           var noPrint = true; var noCopy = true; var noScreenshot = true; var
           autoBlur = true;
         </Script>
         <Script
           type="text/javascript"
           src="https://pdfanticopy.com/noprint.js"
-        ></Script>
+        ></Script> */}
         <body>
           <Main />
           <NextScript />
