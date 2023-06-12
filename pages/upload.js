@@ -1,8 +1,19 @@
 const Upload = () => {
-  const onFileUpload = () => console.log("333");
+  const onFileUpload = async (e) => {
+    // const selectedFile = document.getElementById("input").files[0];
+    e.preventDefault();
+    const reader = new FileReader();
+    reader.onload = async (e) => {
+      const text = e.target.result;
+      console.log(text);
+      alert(text);
+    };
+    reader.readAsText(e.target.files[0]);
+  };
+
   return (
     <>
-      <input type={"file"} onChange={onFileUpload} />
+      <input type={"file"} id={"input"} onChange={(e) => onFileUpload(e)} />
       {/* <Button
         className={"w-100"}
         color="info"

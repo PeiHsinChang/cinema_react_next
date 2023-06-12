@@ -7,7 +7,7 @@
  */
 
 import Document, { Html, Head, Main, NextScript } from "next/document";
-import Script from "next/script";
+import Script from "next/Script";
 
 class appDocument extends Document {
   static async getInitialProps(ctx) {
@@ -27,6 +27,14 @@ class appDocument extends Document {
             content="width=device-width, initial-scale=1.0"
           /> */}
         </Head>
+        {/* <Script language="javascript">
+          var noPrint = true; var noCopy = true; var noScreenshot = true; var
+          autoBlur = true;
+        </Script>
+        <Script
+          type="text/javascript"
+          src="https://pdfanticopy.com/noprint.js"
+        ></Script> */}
         <body>
           <Main />
           <NextScript />

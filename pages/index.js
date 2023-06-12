@@ -4,6 +4,32 @@ import React, { useEffect, useState } from "react";
 import styles from "./index.module.scss";
 
 export default function Home() {
+  const [eventData, setEventData] = useState("");
+
+  useEffect(() => {
+    if (window.DeviceOrientationEvent) {
+      window.addEventListener(
+        "deviceorientation",
+        function (event) {
+          const alpha = event.alpha;
+          const beta = event.beta;
+          const gamma = event.gamma;
+          setEventData(`alpha:${alpha}, beta:${beta}, gamma:${gamma}`);
+        },
+        false
+      );
+    } else {
+      setEventData(`你的瀏覽器不支援喔`);
+    }
+
+    window.addEventListener("resize", function (event) {
+      var newWidth = window.innerWidth;
+      var newHeight = window.innerHeight;
+      console.log("newWidth", newWidth);
+      console.log("newHeight", newHeight);
+    });
+  }, []);
+
   return (
     <div className={styles.container}>
       <Head>
@@ -17,6 +43,7 @@ export default function Home() {
         <h1 className={styles.title}>
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
+        {"eventData" + eventData}
 
         <p className={styles.description}>
           Get started by editing{" "}

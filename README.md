@@ -37,4 +37,14 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 ### 問題選項
 
 利用 react 元件製作一個問答小遊戲
-參考文件: https://cinema-react-next-peihsinchang.vercel.app/logicQuestions
+Demo 網址: https://cinema-react-next-peihsinchang.vercel.app/logicQuestions
+
+### 邏輯計算
+
+Demo 網址: https://cinema-react-next-peihsinchang.vercel.app/puzzleGame
+
+### 翻牌小遊戲
+
+- 利用 next API router 做檔名的讀取，擷取檔名，在 cardGame render 圖檔與遊戲邏輯。
+
+Demo 網址: https://cinema-react-next-peihsinchang.vercel.app/cardGame
