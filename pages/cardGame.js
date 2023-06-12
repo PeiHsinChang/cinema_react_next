@@ -31,7 +31,7 @@ const Cards = ({ data }) => {
   useEffect(() => {
     if (selectData.length == 2) {
       /** 1. 先filter isOpen = true
-       *  2. 是否match ? isMatch的style: isOpen的style */
+       *  2. 是否match ? isMatch的style: 重新開始 */
       setTimeout(() => {
         const isMatchCards = selectData[0] === selectData[1];
         setNewCardsData = JSON.parse(JSON.stringify(cardsData));
@@ -53,7 +53,6 @@ const Cards = ({ data }) => {
   }, [selectData]);
 
   const clickCard = (data) => {
-    console.log("clickCard");
     const { cardIndex, value } = data.target.dataset;
     /** Deep Copy */
     setNewCardsData = JSON.parse(JSON.stringify(cardsData));
@@ -67,30 +66,6 @@ const Cards = ({ data }) => {
   };
 
   const card = (data, index) => {
-    const handleTransitionEnd = (e) => {
-      console.log(e);
-      // if (data.isOpen && selectData.length === 2) {
-      //   // console.log("handleTransitionEnd", index, data);
-      //   /** 1. 先filter isOpen = true
-      //    *  2. 是否match ? isMatch的style: isOpen的style */
-      //   // console.log("selectData", selectData);
-      //   const isMatchCards = selectData[0] === selectData[1];
-      //   setNewCardsData = JSON.parse(JSON.stringify(cardsData));
-
-      //   setNewCardsData.map((item) => {
-      //     if (item.isOpen) {
-      //       if (isMatchCards) {
-      //         item.isMatch = true;
-      //       } else {
-      //         item.isMatch = false;
-      //         item.isOpen = false;
-      //       }
-      //     }
-      //   });
-      //   setCardsData(setNewCardsData);
-      //   setSelectData([]);
-      // }
-    };
     return (
       <div
         key={index}
@@ -100,7 +75,6 @@ const Cards = ({ data }) => {
         onClick={(e) =>
           data.isOpen || selectData.length === 2 ? "" : clickCard(e)
         }
-        onTransitionEnd={(e) => handleTransitionEnd(e)}
       >
         <div
           className={styles.front}
@@ -119,7 +93,6 @@ const Cards = ({ data }) => {
       </div>
     );
   };
-  // return card(data[0]);
   return (
     <div className={styles.playground}>
       {cardsData.map((item, index) => card(item, index))}
