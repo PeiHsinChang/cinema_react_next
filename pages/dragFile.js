@@ -9,7 +9,7 @@ function drawLot(numItems, rows) {
     let selectedItems = [];
     for (let i = 0; i < numItems; i++) {
       let randomIndex = Math.floor(Math.random() * rows.length);
-      let selectedItem = rows[randomIndex];
+      let selectedItem = rows[randomIndex][0];
 
       // 標記已選項目
       rows.splice(randomIndex, 1);
@@ -26,14 +26,12 @@ function drawLot(numItems, rows) {
 const DragFile = (porps) => {
   const [primary, setPrimary] = useState(0);
   const [secondary, setSecondary] = useState(0);
-
+  const [data, setData] = useState([]);
   const readxlsFileFunc = async (primary, secondary) => {
     try {
       // if (!document) return;
 
       if (typeof document !== "undefined") {
-        let element = document.querySelector(".class-name");
-
         // Manipulating the DOM here
         let fileInput = document?.getElementById("fileToUpload");
         let file = fileInput.files[0];
@@ -44,17 +42,20 @@ const DragFile = (porps) => {
           console.log({ count });
 
           list = drawLot(count, rows);
+          setData(list);
           console.log(list);
+
           // `rows` is an array of rows
           // each row being an array of cells.
-
-          // return;
         });
       }
     } catch (error) {
       console.log(error);
     }
   };
+
+  const pList = data.splice(0, primary);
+  console.log({ pList });
 
   return (
     <div>
@@ -90,6 +91,16 @@ const DragFile = (porps) => {
           }
         />
       </form>
+      <div>
+        正取
+        {pList.map((item, index) => {
+          return <div>{item}</div>;
+        })}
+        備取
+        {data.map((item, index) => {
+          return <div>{item}</div>;
+        })}
+      </div>
     </div>
   );
 };
