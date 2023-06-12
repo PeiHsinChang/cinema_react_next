@@ -94,11 +94,11 @@ const DragFile = (porps) => {
       <div>
         正取
         {pList.map((item, index) => {
-          return <div>{item}</div>;
+          return <div key={"p" + index}>{item}</div>;
         })}
         備取
         {data.map((item, index) => {
-          return <div>{item}</div>;
+          return <div key={"s" + index}>{item}</div>;
         })}
       </div>
     </div>
