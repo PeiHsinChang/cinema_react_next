@@ -3,6 +3,8 @@ import styles from "./dragFile.module.scss";
 
 import readXlsxFile from "read-excel-file";
 
+const XlsxPopulate = require("xlsx-populate");
+
 // 從抽籤池中隨機選擇指定數量的項目
 function drawLot(numItems, rows) {
   if (numItems <= rows.length) {
@@ -54,6 +56,28 @@ const DragFile = (porps) => {
     }
   };
 
+  const readxlsFileFunc2 = async (primary, secondary) => {
+    let fileInput = document?.getElementById("fileToUpload");
+    let file = fileInput.files[0];
+
+    console.log(file);
+
+    await XlsxPopulate.fromDataAsync(file, {
+      password: "volvobev",
+    }).then((workbook) => {
+      console.log({ workbook });
+    });
+    // console.log({ workbook });
+
+    // XlsxPopulate.fromDataAsync(file).then((workbook) => {
+    //   const data = workbook.toFileAsync("./out.xlsx", {
+    //     password: "volvobev",
+    //   });
+    //   // ...
+    //   console.log({ data });
+    // });
+  };
+
   const pList = data.splice(0, primary);
   console.log({ pList });
 
@@ -87,7 +111,8 @@ const DragFile = (porps) => {
           type="button"
           value="開始抽籤"
           onClick={() =>
-            readxlsFileFunc(parseInt(primary), parseInt(secondary))
+            // readxlsFileFunc(parseInt(primary), parseInt(secondary))
+            readxlsFileFunc2(parseInt(primary), parseInt(secondary))
           }
         />
       </form>

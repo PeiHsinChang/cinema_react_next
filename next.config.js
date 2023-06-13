@@ -12,7 +12,12 @@ const nextConfig = {
 
   /** 打包位置設定default: ./.next */
   // distDir: "build",
-  webpack: (config) => config,
+  webpack5: true,
+  webpack: (config) => {
+    config.resolve.fallback = { fs: false };
+
+    return config;
+  },
 };
 
 module.exports = nextConfig;
