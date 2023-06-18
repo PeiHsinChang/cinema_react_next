@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styles from "./dragFile.module.scss";
-import readXlsxFile from "read-excel-file";
+
+const XlsxPopulate = require("xlsx-populate");
 
 // 從抽籤池中隨機選擇指定數量的項目
 function drawLot(numItems, rows) {
@@ -27,24 +28,38 @@ const DragFile = (porps) => {
   const [secondary, setSecondary] = useState(0);
   const [data, setData] = useState([]);
 
-  const readxlsFileFunc = async (primary, secondary) => {
-    try {
-      if (typeof document !== "undefined") {
-        // Manipulating the DOM here
-        let fileInput = document?.getElementById("fileToUpload");
-        let file = fileInput.files[0];
-        let list = [];
-        await readXlsxFile(file).then((rows) => {
-          const count = primary + secondary;
-          list = drawLot(count, rows);
-          setData(list);
-          // `rows` is an array of rows
-          // each row being an array of cells.
-        });
-      }
-    } catch (error) {
-      console.log(error);
-    }
+  const readxlsFileFunc2 = async (primary, secondary) => {
+    let fileInput = document?.getElementById("fileToUpload");
+    let file = fileInput.files[0];
+
+    console.log(file);
+    // const workbook = await XlsxPopulate.fromDataAsync(file, {
+    //   password: "volvobev",
+    // }).then((data) => {
+    //   console.log(data);
+    //   return data;
+    // });
+    // console.log(workbook);
+
+    // const data = await XlsxPopulate.fromDataAsync(
+    //   file
+    //   //   ,
+    //   //    {
+    //   //   password: "volvobev",
+    //   // }
+    // ).then((workbook) => {
+    //   console.log({ workbook });
+    //   return workbook;
+    // });
+    // console.log({ workbook });
+
+    // XlsxPopulate.fromDataAsync(file).then((workbook) => {
+    //   const data = workbook.toFileAsync("./out.xlsx", {
+    //     password: "volvobev",
+    //   });
+    //   // ...
+    //   console.log({ data });
+    // });
   };
 
   const pList = data.splice(0, primary);
@@ -80,7 +95,7 @@ const DragFile = (porps) => {
           type="button"
           value="開始抽籤"
           onClick={() =>
-            readxlsFileFunc(parseInt(primary), parseInt(secondary))
+            readxlsFileFunc2(parseInt(primary), parseInt(secondary))
           }
         />
       </form>
