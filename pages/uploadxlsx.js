@@ -29,12 +29,14 @@ const DragFile = () => {
   const [password, setPassword] = useState("");
   const [xlsxFile, setXlsxFile] = useState(null);
   const [data, setData] = useState([]);
+  const [sheet, setSheet] = useState("");
 
   const handleFileUpload = async (event) => {
     const file = event.target.files[0];
     setXlsxFile(file);
   };
 
+  console.log({ xlsxFile });
   const readxlsFileFunc2 = async (primary, secondary) => {
     if (xlsxFile === null) {
       alert("請選擇檔案");
@@ -45,7 +47,8 @@ const DragFile = () => {
       password: password,
     })
       .then((data) => {
-        const sheet = data.sheet("Sheet1");
+        const sheet = data.sheet(sheet);
+        console.log(data);
         const range = sheet.usedRange();
         const values = range.value();
 
@@ -54,6 +57,7 @@ const DragFile = () => {
         setData(list);
       })
       .catch((err) => {
+        console.log(err, password);
         alert("請輸入密碼");
         return err;
       });
@@ -63,7 +67,7 @@ const DragFile = () => {
 
   return (
     <div>
-      Hello DragFile
+      Hello xlsxFile
       <form encType="multipart/form-data">
         <div>
           正取
@@ -75,6 +79,10 @@ const DragFile = () => {
             value={secondary}
             onChange={(e) => setSecondary(e.target.value)}
           />
+        </div>
+        <div>
+          頁籤名稱
+          <input value={sheet} onChange={(e) => setSheet(e.target.value)} />
         </div>
         <label>
           <div className={styles.button}>
