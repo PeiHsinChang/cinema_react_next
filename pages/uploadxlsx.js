@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./dragFile.module.scss";
 
-const XlsxPopulate = require("xlsx-populate");
+import XlsxPopulate from "xlsx-populate";
 
 // 從抽籤池中隨機選擇指定數量的項目
 function drawLot(numItems, rows) {
@@ -23,47 +23,43 @@ function drawLot(numItems, rows) {
   }
 }
 
-const DragFile = (porps) => {
+const DragFile = () => {
   const [primary, setPrimary] = useState(0);
   const [secondary, setSecondary] = useState(0);
+  const [password, setPassword] = useState("");
+  const [xlsxFile, setXlsxFile] = useState(null);
   const [data, setData] = useState([]);
 
+  const handleFileUpload = async (event) => {
+    const file = event.target.files[0];
+    setXlsxFile(file);
+  };
+
   const readxlsFileFunc2 = async (primary, secondary) => {
-    let fileInput = document?.getElementById("fileToUpload");
-    let file = fileInput.files[0];
+    if (xlsxFile === null) {
+      alert("請選擇檔案");
+      return;
+    }
+    let list = [];
+    await XlsxPopulate.fromDataAsync(xlsxFile, {
+      password: password,
+    })
+      .then((data) => {
+        const sheet = data.sheet("Sheet1");
+        const range = sheet.usedRange();
+        const values = range.value();
 
-    console.log(file);
-    // const workbook = await XlsxPopulate.fromDataAsync(file, {
-    //   password: "volvobev",
-    // }).then((data) => {
-    //   console.log(data);
-    //   return data;
-    // });
-    // console.log(workbook);
-
-    // const data = await XlsxPopulate.fromDataAsync(
-    //   file
-    //   //   ,
-    //   //    {
-    //   //   password: "volvobev",
-    //   // }
-    // ).then((workbook) => {
-    //   console.log({ workbook });
-    //   return workbook;
-    // });
-    // console.log({ workbook });
-
-    // XlsxPopulate.fromDataAsync(file).then((workbook) => {
-    //   const data = workbook.toFileAsync("./out.xlsx", {
-    //     password: "volvobev",
-    //   });
-    //   // ...
-    //   console.log({ data });
-    // });
+        const count = primary + secondary;
+        list = drawLot(count, values);
+        setData(list);
+      })
+      .catch((err) => {
+        alert("請輸入密碼");
+        return err;
+      });
   };
 
   const pList = data.splice(0, primary);
-  console.log({ pList });
 
   return (
     <div>
@@ -85,12 +81,21 @@ const DragFile = (porps) => {
             import
             <input
               type="file"
-              id="fileToUpload"
               style={{ display: "none" }}
-              onChange={(e) => console.log(e)}
+              accept=".xlsx"
+              onChange={handleFileUpload}
             />
+            {xlsxFile && <p>已選擇文件：{xlsxFile.name}</p>}
           </div>
         </label>
+        <div>
+          密碼
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
         <input
           type="button"
           value="開始抽籤"
