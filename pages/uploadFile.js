@@ -47,8 +47,8 @@ const UploadFile = (porps) => {
     }
   };
 
-  const pList = data.splice(0, primary);
-  console.log({ pList });
+  // const pList = data.splice(0, primary);
+  // console.log({ pList });
 
   const readCsvFileFunc = (primary, secondary) => {
     const csvFile = document.getElementById("csvToUpload");
@@ -61,8 +61,18 @@ const UploadFile = (porps) => {
       const count = primary + secondary;
 
       const list = drawLot(count, data);
+      list.unshift("正取");
+      console.log("unshift", { list }, primary);
+      list.splice(primary + 1, 0, "備取");
+      console.log({ list });
       setData(list);
+
+      let csvContent =
+        "data:text/csv;charset=utf-8," + list.map((e) => (e += "\n"));
+      console.log({ csvContent });
       // document.write(text);
+      let encodedUri = encodeURI(csvContent);
+      window.open(encodedUri);
     };
     reader.readAsText(input);
   };
@@ -107,7 +117,7 @@ const UploadFile = (porps) => {
             }
           />
         </form>
-        <div>
+        {/* <div>
           正取
           {pList.map((item, index) => {
             return <div key={"p" + index}>{item}</div>;
@@ -116,7 +126,7 @@ const UploadFile = (porps) => {
           {data.map((item, index) => {
             return <div key={"s" + index}>{item}</div>;
           })}
-        </div>
+        </div> */}
       </div>
       {/* 只接受csv */}
       <div>
@@ -156,7 +166,7 @@ const UploadFile = (porps) => {
             }
           />
         </form>
-        <div>
+        {/* <div>
           正取
           {pList.map((item, index) => {
             return <div key={"p" + index}>{item}</div>;
@@ -165,7 +175,7 @@ const UploadFile = (porps) => {
           {data.map((item, index) => {
             return <div key={"s" + index}>{item}</div>;
           })}
-        </div>
+        </div> */}
       </div>
     </>
   );
