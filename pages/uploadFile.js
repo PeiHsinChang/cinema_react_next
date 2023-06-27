@@ -61,14 +61,14 @@ const UploadFile = (porps) => {
       const count = primary + secondary;
 
       const list = drawLot(count, data);
-      list.unshift("正取");
+      list.unshift(",正取");
       console.log("unshift", { list }, primary);
       list.splice(primary + 1, 0, "備取");
       console.log({ list });
       setData(list);
 
       let csvContent =
-        "data:text/csv;charset=utf-8," + list.map((e) => (e += "\n"));
+        "data:text/csv;charset=utf-8,%EF%BB%BF" + list.map((e) => (e += "\n"));
       console.log({ csvContent });
       // document.write(text);
       let encodedUri = encodeURI(csvContent);
