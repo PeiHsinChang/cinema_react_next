@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styles from "./dragFile.module.scss";
+import styles from "./uploadFile.module.scss";
 
 import XlsxPopulate from "xlsx-populate";
 
