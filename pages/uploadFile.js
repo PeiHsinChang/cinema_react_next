@@ -68,7 +68,7 @@ const UploadFile = (porps) => {
       setData(list);
 
       let csvContent =
-        "data:text/csv;charset=utf-8,%EF%BB%BF" + list.map((e) => (e += "\n"));
+        "data:text/csv;charset=utf-8," + list.map((e) => (e += "\n"));
       console.log({ csvContent });
       // document.write(text);
       let encodedUri = encodeURI(csvContent);
