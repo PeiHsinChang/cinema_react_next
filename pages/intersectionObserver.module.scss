@@ -1,0 +1,27 @@
+.cardContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: flex-start;
+  height: 700px;
+  border: 2px solid red;
+  overflow: auto;
+}
+
+.card {
+  min-height: 200px;
+  background: #fff;
+  border: 1px solid #000;
+  border-radius: 0.25rem;
+  padding: 0.5rem;
+  transform: translateX(100px);
+  opacity: 0;
+  transition: 150ms;
+  color: #000;
+  transition: all 0.5s ease-in;
+}
+
+.show {
+  transform: translateX(0);
+  opacity: 1;
+}
