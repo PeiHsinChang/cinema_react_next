@@ -1,0 +1,42 @@
+// Flex 空間分配
+// https://ithelp.ithome.com.tw/articles/10208741#_=_
+// flex: flex-grow / flex-shrink / flex-basis
+
+// https://www.casper.tw/css/2017/07/21/css-flex/
+
+.wrapper {
+  touch-action: manipulation;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border: 1px solid red;
+  width: 300px;
+  height: 150px;
+  canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+  }
+
+  #btn {
+    margin-top: 20%;
+    text-align: center;
+  }
+  #btn button {
+    font-size: 20px;
+    color: #fff;
+    background: #169bd5;
+    border-color: #169bd5;
+    border-radius: 5px;
+    padding: 5px 20px;
+    display: none;
+    margin: 0 auto 10px;
+  }
+  img {
+    width: 200px;
+    height: 100px;
+    display: none;
+  }
+}
