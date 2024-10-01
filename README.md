@@ -2,7 +2,7 @@
 
 ## Introduction
 
-期望使用到的技術: koa.js react.js next.js，這是使用[Next.js](https://nextjs.org/) 的[`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) 專案建置的。
+期望使用到的技術: react.js next.js，這是使用[Next.js](https://nextjs.org/) 的[`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) 專案建置的。
 
 ## Getting Started
 
