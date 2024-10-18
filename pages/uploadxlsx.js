@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./uploadFile.module.scss";
 
-import XlsxPopulate from "xlsx-populate";
+// import XlsxPopulate from "xlsx-populate";
 
 // 從抽籤池中隨機選擇指定數量的項目
 function drawLot(numItems, rows) {
@@ -37,31 +37,31 @@ const DragFile = () => {
   };
 
   console.log({ xlsxFile });
-  const readxlsFileFunc2 = async (primary, secondary) => {
-    if (xlsxFile === null) {
-      alert("請選擇檔案");
-      return;
-    }
-    let list = [];
-    await XlsxPopulate.fromDataAsync(xlsxFile, {
-      password: password,
-    })
-      .then((data) => {
-        const sheet = data.sheet(sheet);
-        console.log(data);
-        const range = sheet.usedRange();
-        const values = range.value();
+  // const readxlsFileFunc2 = async (primary, secondary) => {
+  //   if (xlsxFile === null) {
+  //     alert("請選擇檔案");
+  //     return;
+  //   }
+  //   let list = [];
+  //   await XlsxPopulate.fromDataAsync(xlsxFile, {
+  //     password: password,
+  //   })
+  //     .then((data) => {
+  //       const sheet = data.sheet(sheet);
+  //       console.log(data);
+  //       const range = sheet.usedRange();
+  //       const values = range.value();
 
-        const count = primary + secondary;
-        list = drawLot(count, values);
-        setData(list);
-      })
-      .catch((err) => {
-        console.log(err, password);
-        alert("請輸入密碼");
-        return err;
-      });
-  };
+  //       const count = primary + secondary;
+  //       list = drawLot(count, values);
+  //       setData(list);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err, password);
+  //       alert("請輸入密碼");
+  //       return err;
+  //     });
+  // };
 
   const pList = data.splice(0, primary);
 
@@ -107,8 +107,9 @@ const DragFile = () => {
         <input
           type="button"
           value="開始抽籤"
-          onClick={() =>
-            readxlsFileFunc2(parseInt(primary), parseInt(secondary))
+          onClick={
+            () => {}
+            // readxlsFileFunc2(parseInt(primary), parseInt(secondary))
           }
         />
       </form>
