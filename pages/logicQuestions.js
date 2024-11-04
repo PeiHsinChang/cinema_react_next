@@ -3,7 +3,7 @@ import Image from "next/image";
 
 import styles from "./logicQuestions.module.scss";
 import Correct from "../static/correct.svg";
-import Error from "../static/error.svg";
+import Wrong from "../static/error.svg";
 
 const data = [
   {
@@ -151,15 +151,17 @@ const LogicQuestions = () => {
   switch (page) {
     case 1:
       pageContent = (
-        <div className={styles.button} onClick={() => setPage(page + 1)}>
-          開始挑戰
+        <div className={styles.pageLayout}>
+          <div className={styles.button} onClick={() => setPage(page + 1)}>
+            開始挑戰
+          </div>
         </div>
       );
       break;
     case 2:
       pageContent = (
         <>
-          <div className={styles.page2Content}>
+          <div className={styles.pageLayout}>
             {data &&
               data.map((item, index) => {
                 const delay = index;
@@ -205,11 +207,13 @@ const LogicQuestions = () => {
       break;
     case 4:
       pageContent = (
-        <div
-          className={`${styles.button} ${getGift ? styles.unClick : null}`}
-          onClick={getGift ? () => {} : () => setGetGift(true)}
-        >
-          {getGift ? "已領取獎勵" : "領取獎勵"}
+        <div className={styles.pageLayout}>
+          <div
+            className={`${styles.button} ${getGift ? styles.unClick : null}`}
+            onClick={getGift ? () => {} : () => setGetGift(true)}
+          >
+            {getGift ? "已領取獎勵" : "領取獎勵"}
+          </div>
         </div>
       );
       break;
@@ -232,7 +236,6 @@ const LogicQuestions = () => {
     setIsCorrect(false);
     setIsOpenModal(false);
   };
-  console.log("render");
 
   return (
     <div className={styles.container}>
@@ -244,7 +247,7 @@ const LogicQuestions = () => {
         <div className={styles.alertBox} onClick={(e) => e.stopPropagation()}>
           <div className={styles.icon}>
             <Image
-              src={isCorrect ? Correct : Error}
+              src={isCorrect ? Correct : Wrong}
               alt="littlewoman"
               layout="responsive"
             />
