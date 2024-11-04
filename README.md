@@ -6,28 +6,39 @@
 
 ## Getting Started
 
-First, run the development server:
+此專案採用 yarn 套件管理作為開發工具，當專案載下來後，請執行以下指令進行操作
+
+1. 請先用 yarn 把 node_modules 裡的套件安裝起來，指令如下
 
 ```bash
-npm run dev
+yarn
 ```
 
-打開瀏覽其查看結果 -> [http://localhost:3005](http://localhost:3005)
+2. node_modules 出現之後，就可以啟動此專案的開發模式，指令如下
+
+```bash
+yarn dev
+```
+
+3. 專案打包，指令如下
+
+```bash
+yarn build
+```
+
+4. 打開瀏覽其查看結果 -> [http://localhost:3005](http://localhost:3005)
 
 ## Learn More
 
-Next.js 網路資源:
+- [Next.js 網路資源](https://nextjs.org/docs)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- [React 的相關文件](https://react.dev)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- [利用 Vercel 做專案的部署](https://nextjs.org/docs/deployment)
 
 ## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+此專案的部署平台使用[Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme)，是 NextJs 的團隊所開發的。
 
 ### 使用 next <Image />
 
