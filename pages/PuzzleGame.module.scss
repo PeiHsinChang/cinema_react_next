@@ -5,31 +5,28 @@
 // https://www.casper.tw/css/2017/07/21/css-flex/
 
 .container {
-  box-sizing: border-box;
-  padding: 4rem 2rem;
   min-height: 100vh;
   flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: relative;
+}
+
+.containerByRow {
+  display: flex;
+  flex-direction: row;
+  min-width: 300px;
+  width: 60%;
+  max-width: 500px;
   * {
     box-sizing: border-box;
   }
 }
 
-.containerByRow {
-  display: flex;
-  // border: 1px solid green;
-  flex-direction: row;
-  min-width: 300px;
-  width: 60%;
-}
-
 .boxWrapper {
   box-sizing: border-box;
-
-  // border: 1px solid orange;
   display: flex;
   flex: 3 1 75%;
   flex-direction: row;
@@ -39,16 +36,14 @@
 
 .rowSumWrapper {
   box-sizing: border-box;
-  // border: 4px solid orange;
   display: flex;
   flex: 1 0 25%;
   flex-direction: column;
-  // flex-wrap: wrap;
 }
+
 .box {
   flex: 1 1 30%;
   display: flex;
-  // border: 1px solid red;
   aspect-ratio: 1/1;
   justify-content: center;
   align-items: center;

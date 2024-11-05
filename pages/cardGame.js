@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import styles from "./cardGame.module.scss";
 import { server } from "../config";
 import Modal from "../components/Modal/Modal";
+import Router from "next/router";
 
 /** 快速排序法
  * https://medium.com/schaoss-blog/%E5%89%8D%E7%AB%AF%E4%B8%89%E5%8D%81-06-js-%E8%AB%8B%E4%BD%A0%E5%9C%A8%E6%97%81%E9%82%8A%E7%9A%84%E7%99%BD%E6%9D%BF%E5%AF%AB%E5%80%8B%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%E6%BC%94%E7%AE%97%E6%B3%95-8d8ad4903b1c
@@ -105,7 +106,8 @@ function CardGame({ data }) {
   };
 
   const closeModal = (e) => {
-    setOpenModal(false);
+    // setOpenModal(false);
+    Router.reload();
   };
 
   return (
