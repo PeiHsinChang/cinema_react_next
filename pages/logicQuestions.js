@@ -4,6 +4,7 @@ import Image from "next/image";
 import styles from "./logicQuestions.module.scss";
 import Correct from "../static/correct.svg";
 import Wrong from "../static/error.svg";
+import Modal from "../components/Modal/Modal";
 
 const data = [
   {
@@ -77,12 +78,6 @@ const LogicQuestions = () => {
   const refs = useRef(null);
   useEffect(() => {
     setIsFinish(questionIndex + 1 === data.length);
-    const modalAlert = document.getElementById("modalAlert");
-    if (isOpenModal) {
-      modalAlert.style.display = "flex";
-    } else {
-      modalAlert.style.display = "none";
-    }
 
     if (isCorrect && isFinish) {
       setAlertContent("恭喜你都答對了！");
@@ -239,27 +234,21 @@ const LogicQuestions = () => {
 
   return (
     <div className={styles.container}>
-      <div
-        className={styles.alertModal}
-        id="modalAlert"
-        onClick={(e) => closeModal(e)}
-      >
-        <div className={styles.alertBox} onClick={(e) => e.stopPropagation()}>
-          <div className={styles.icon}>
-            <Image
-              src={isCorrect ? Correct : Wrong}
-              alt="littlewoman"
-              layout="responsive"
-            />
-          </div>
-          <div className={styles.alertContent}>
-            {alertContent ? alertContent : ""}
-          </div>
-          <div className={styles.button} onClick={closeModalAlert}>
-            {isCorrect ? (isFinish ? "領取獎勵！" : "下一題") : "重新作答"}
-          </div>
+      <Modal isOpenModal={isOpenModal} closeModalHandler={(e) => closeModal(e)}>
+        <div className={styles.icon}>
+          <Image
+            src={isCorrect ? Correct : Wrong}
+            alt="littlewoman"
+            layout="responsive"
+          />
         </div>
-      </div>
+        <div className={styles.alertContent}>
+          {alertContent ? alertContent : ""}
+        </div>
+        <div className={styles.button} onClick={closeModalAlert}>
+          {isCorrect ? (isFinish ? "領取獎勵！" : "下一題") : "重新作答"}
+        </div>
+      </Modal>
       <div className={styles.questionBlock}>{pageContent}</div>
     </div>
   );

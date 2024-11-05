@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import styles from "./cardGame.module.scss";
 import { server } from "../config";
+import Modal from "../components/Modal/Modal";
 
 /** 快速排序法
  * https://medium.com/schaoss-blog/%E5%89%8D%E7%AB%AF%E4%B8%89%E5%8D%81-06-js-%E8%AB%8B%E4%BD%A0%E5%9C%A8%E6%97%81%E9%82%8A%E7%9A%84%E7%99%BD%E6%9D%BF%E5%AF%AB%E5%80%8B%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%E6%BC%94%E7%AE%97%E6%B3%95-8d8ad4903b1c
@@ -78,14 +79,15 @@ function cardGame({ data }) {
 
         setCardsData(setNewCardsData);
         setSelectData([]);
-      }, 1000);
-    }
-    // const allMatches = setNewCardsData.every((item) => item.isMatch);
-    const allMatches = selectData.every((item) => item.isMatch);
 
-    if (allMatches) {
-      console.log({ allMatches });
-      setOpenModal(true);
+        const allMatches = setNewCardsData.every(
+          (item) => item.isMatch === true
+        );
+
+        if (allMatches) {
+          setOpenModal(true);
+        }
+      }, 1000);
     }
   }, [selectData]);
 
@@ -103,11 +105,14 @@ function cardGame({ data }) {
   };
 
   const closeModal = (e) => {
-    // setOpenModal(false);
+    setOpenModal(false);
   };
 
   return (
     <div className={styles.container}>
+      <Modal isOpenModal={openModal} closeModalHandler={closeModal}>
+        恭喜你闖關完成！
+      </Modal>
       <div className={styles.playground}>
         {cardsData.map((item, index) => (
           <Card
@@ -119,11 +124,6 @@ function cardGame({ data }) {
           />
         ))}
       </div>
-      <div
-        className={styles.alertModal}
-        id="modalAlert"
-        onClick={(e) => closeModal(e)}
-      />
     </div>
   );
 }
@@ -136,7 +136,7 @@ export async function getServerSideProps() {
   filenames.sort(() => 0.5 - Math.random());
   const newFilenames = filenames.slice(0, 8);
   let data = newFilenames.map((filename, index) => {
-    return { value: index, filename: filename, isOpen: false, isMatch: true };
+    return { value: index, filename: filename, isOpen: false, isMatch: false };
   });
 
   let data2 = [...data, ...data];

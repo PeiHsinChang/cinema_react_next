@@ -1,5 +1,5 @@
 /**
- * 很神奇的是路徑不能是"~/"，但可以是"../"
+ * 路徑是"../"
  * */
 import "../styles/global.scss";
 import Head from "next/head";
