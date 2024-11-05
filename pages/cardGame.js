@@ -45,7 +45,7 @@ const Card = ({ item, index, clickCard, selectedItemsIs2 }) => {
   );
 };
 
-function cardGame({ data }) {
+function CardGame({ data }) {
   const [cardsData, setCardsData] = useState(data);
   const [selectData, setSelectData] = useState([]);
   const [openModal, setOpenModal] = useState(false);
@@ -149,4 +149,4 @@ export async function getServerSideProps() {
   return { props: { data: data2 } };
 }
 
-export default cardGame;
+export default CardGame;
