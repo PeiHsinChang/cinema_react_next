@@ -1,7 +1,7 @@
 //
 
 .container {
-  min-height: 100vh;
+  min-height: 100dvh;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -172,7 +172,7 @@ div.card:nth-child(odd) {
   }
   to {
     opacity: 1;
-    left: -50px;
+    left: -10px;
   }
 }
 
@@ -183,6 +183,6 @@ div.card:nth-child(odd) {
   }
   to {
     opacity: 1;
-    left: 50px;
+    left: 10px;
   }
 }
