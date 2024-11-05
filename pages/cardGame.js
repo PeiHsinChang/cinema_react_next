@@ -1,7 +1,5 @@
-import Image from "next/image";
 import { useEffect, useState, useRef } from "react";
 import styles from "./cardGame.module.scss";
-// import cover from "../static/OnePiece/OnePieceCover.png";
 import { server } from "../config";
 
 /** 快速排序法
@@ -22,14 +20,39 @@ function quickSort(arr) {
 
 // const test = quickSort([48, 44, 22, 99, 77, 32]);
 
-const Cards = ({ data }) => {
-  const [cardsData, setCardsData] = useState(data);
-  const [selectData, setSelectData] = useState([]);
-  let setNewCardsData;
+const Card = ({ item, index, clickCard, selectedItemsIs2 }) => {
   const clickCardStyle = styles.clickCard;
 
+  return (
+    <div
+      key={index}
+      className={`${styles.card} ${item.isOpen ? clickCardStyle : ""} ${
+        item.isMatch ? styles.matchStyle : ""
+      }`}
+      onClick={(e) => (item.isOpen || selectedItemsIs2 ? "" : clickCard(e))}
+    >
+      <div
+        className={styles.front}
+        data-value={item.value}
+        data-card-index={index}
+      />
+      <div className={styles.back}>
+        {/* 暫時不用 next 優化的Image */}
+        <img src={`/static/OnePiece/${item.filename}`} alt={item.filename} />
+      </div>
+    </div>
+  );
+};
+
+function cardGame({ data }) {
+  const [cardsData, setCardsData] = useState(data);
+  const [selectData, setSelectData] = useState([]);
+  const [openModal, setOpenModal] = useState(false);
+
+  let setNewCardsData;
+
   useEffect(() => {
-    if (selectData.length == 2) {
+    if (selectData.length === 2) {
       /** 1. 先filter isOpen = true
        *  2. 是否match ? isMatch的style: 重新開始 */
       setTimeout(() => {
@@ -40,15 +63,29 @@ const Cards = ({ data }) => {
           if (item.isOpen) {
             if (isMatchCards) {
               item.isMatch = true;
+            } else if (item.isMatch) {
             } else {
               item.isMatch = false;
               item.isOpen = false;
             }
+            // 原: 一選錯，即重選
+            // else {
+            //   item.isMatch = false;
+            //   item.isOpen = false;
+            // }
           }
         });
+
         setCardsData(setNewCardsData);
         setSelectData([]);
       }, 1000);
+    }
+    // const allMatches = setNewCardsData.every((item) => item.isMatch);
+    const allMatches = selectData.every((item) => item.isMatch);
+
+    if (allMatches) {
+      console.log({ allMatches });
+      setOpenModal(true);
     }
   }, [selectData]);
 
@@ -65,45 +102,28 @@ const Cards = ({ data }) => {
     setSelectData(newSelectData);
   };
 
-  const card = (data, index) => {
-    return (
-      <div
-        key={index}
-        className={`${styles.card} ${data.isOpen ? clickCardStyle : ""} ${
-          data.isMatch ? styles.matchStyle : ""
-        }`}
-        onClick={(e) =>
-          data.isOpen || selectData.length === 2 ? "" : clickCard(e)
-        }
-      >
-        <div
-          className={styles.front}
-          data-value={data.value}
-          data-card-index={index}
-        />
-        <div className={styles.back}>
-          <Image
-            src={`/static/OnePiece/${data.filename}`}
-            alt={data.filename}
-            layout="responsive"
-            width={1}
-            height={1}
-          />
-        </div>
-      </div>
-    );
+  const closeModal = (e) => {
+    // setOpenModal(false);
   };
-  return (
-    <div className={styles.playground}>
-      {cardsData.map((item, index) => card(item, index))}
-    </div>
-  );
-};
 
-function cardGame({ data }) {
   return (
     <div className={styles.container}>
-      <Cards data={data} />
+      <div className={styles.playground}>
+        {cardsData.map((item, index) => (
+          <Card
+            key={index}
+            item={item}
+            index={index}
+            clickCard={clickCard}
+            selectedItemsIs2={selectData.length === 2}
+          />
+        ))}
+      </div>
+      <div
+        className={styles.alertModal}
+        id="modalAlert"
+        onClick={(e) => closeModal(e)}
+      />
     </div>
   );
 }
@@ -116,7 +136,7 @@ export async function getServerSideProps() {
   filenames.sort(() => 0.5 - Math.random());
   const newFilenames = filenames.slice(0, 8);
   let data = newFilenames.map((filename, index) => {
-    return { value: index, filename: filename, isOpen: false, isMatch: false };
+    return { value: index, filename: filename, isOpen: false, isMatch: true };
   });
 
   let data2 = [...data, ...data];

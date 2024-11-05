@@ -30,16 +30,20 @@
   transform: perspective(1000px);
   perspective: 1000px; /* 立體透視深度 */
   // border-radius: 5px;
-}
+  .front,
+  .back {
+    width: 100%;
+    height: 100%;
+    position: absolute; /* 絕對定位使兩個div重疊 */
+    backface-visibility: hidden; /* 元素背後不可看見 */
+    transition: 1s; /*動畫時間 1.5秒*/
 
-.front,
-.back {
-  width: 100%;
-  height: 100%;
-  position: absolute; /* 絕對定位使兩個div重疊 */
-  backface-visibility: hidden; /* 元素背後不可看見 */
-  transition: 1s; /*動畫時間 1.5秒*/
-  // border-radius: 5px;
+    img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
+  }
 }
 
 .front {
