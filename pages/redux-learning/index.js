@@ -1,21 +1,13 @@
-import { useState } from "react";
+import Counter from "../../components/redux-learning/Counter";
+import CounterSummary from "../../components/redux-learning/CounterSummary";
 
 export default function ReduxLearning() {
-  const [count, setCount] = useState(0);
-
   return (
     <main>
-      <h1>第 1 課：useState 計數器</h1>
-      <p>目前數值：<output aria-live="polite">{count}</output></p>
-      <button type="button" onClick={() => setCount((previous) => previous + 1)}>
-        加一
-      </button>
-      <button type="button" onClick={() => setCount((previous) => previous - 1)}>
-        減一
-      </button>
-      <button type="button" onClick={() => setCount(0)}>
-        歸零
-      </button>
+      <h1>第 3 課：React 與 Redux</h1>
+      <p>操作計數器，觀察兩個元件的數值一起改變。</p>
+      <Counter />
+      <CounterSummary />
     </main>
   );
 }

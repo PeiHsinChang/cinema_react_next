@@ -72,6 +72,6 @@ console.log(store.getState());
 2. 為什麼要讀 `counter.value`，不是直接讀 `value`？
 3. 如果送出 `{ type: "UNKNOWN" }`，目前數值會變嗎？為什麼？
 
-進度：已提供程式與自動檢查，待學習者執行與回覆後再完成本課。
+進度：已通過腳本檢查。已討論 action 是整個物件、getState 回傳資料而非 reducers，以及 UNKNOWN 會保留原值；學習者表示理解，進入第 3 課。
 
 參考：[configureStore](https://redux.js.org/toolkit/api/configureStore)、[Store API](https://redux.js.org/api/store)。

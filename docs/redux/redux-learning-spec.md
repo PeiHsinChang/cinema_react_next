@@ -118,6 +118,8 @@ Redux 負責管理狀態；API 請求仍要另外撰寫。Redux 也不會自動�
 
 ### 第 3 課：讓 React 真正讀取 Redux
 
+學習筆記：[第 3 課：把 Redux 接到 React](redux-lesson-03.md)。已提供 Provider 與兩個共用狀態元件，待操作驗證。
+
 加入 Provider、useSelector、useDispatch，移除計數器的 useState。Provider 的 store 在同一次瀏覽器工作階段保持穩定；伺服器 render 各自建立 store，不共享其他請求的資料。
 
 完成條件：兩個分開的元件讀取同一 counter.value，任一按鈕操作後同步顯示；沒有缺少 Provider 的錯誤，也沒有 render 一次就重設的問題。
