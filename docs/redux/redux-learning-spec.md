@@ -108,6 +108,8 @@ Redux 負責管理狀態；API 請求仍要另外撰寫。Redux 也不會自動�
 
 ### 第 2 課：不接畫面，先看 Redux
 
+學習筆記與操作步驟：[第 2 課：先看 Redux 本身](redux-lesson-02.md)。本課僅安裝 Redux Toolkit，React Redux 留到第 3 課。JavaScript 的 React/Redux 基礎完成後，再轉 TypeScript，接續 SSR 與 TBN API。
+
 加入必要依賴。以 configureStore 和手寫純 reducer 建立一致的狀態形狀 counter.value。透過 getState、dispatch 觀察資料變化；不在 React render 中執行示範 dispatch，也不建立伺服器共用的可變 singleton。
 
 完成條件：初始 0；INCREMENT 後為 1；未知 action 保持原狀；原始 state 不被修改；更新結果始終為數字。
@@ -174,7 +176,7 @@ scientificName 與 taxonName 在本次回應中包含 HTML 標籤；初學版選
 
 - [V] 0：能說明狀態更新流程。
 - [V] 1：本地計數器通過指定操作。
-- [ ] 2：store/reducer 行為與型別正確。
+- [V] 2：store/reducer 行為與型別正確。
 - [ ] 3：兩個元件確實共用 Redux 狀態。
 - [ ] 4：createSlice 改寫後行為不變。
 - [ ] 5：跨頁保留與重新整理重設符合規則。
