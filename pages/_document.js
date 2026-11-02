@@ -11,8 +11,6 @@ import Document, { Html, Head, Main, NextScript } from "next/document";
 class appDocument extends Document {
   static async getInitialProps(ctx) {
     const initialProps = await Document.getInitialProps(ctx);
-    const res = await fetch("https://api.github.com/repos/vercel/next.js");
-    const json = await res.json();
     return { ...initialProps };
   }
 

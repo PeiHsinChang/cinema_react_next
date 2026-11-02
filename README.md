@@ -8,6 +8,12 @@
 
 此專案採用 yarn 套件管理作為開發工具，當專案載下來後，請執行以下指令進行操作
 
+Copy the environment variable template and fill in your own values:
+
+```bash
+cp .env.example .env
+```
+
 1. 請先用 yarn 把 node_modules 裡的套件安裝起來，指令如下
 
 ```bash
@@ -27,6 +33,41 @@ yarn build
 ```
 
 4. 打開瀏覽其查看結果 -> [http://localhost:3005](http://localhost:3005)
+
+## 路由一覽
+
+目前使用 Next.js Pages Router，共有 11 個頁面路由與 3 個 API 路由。啟動 `yarn dev` 後，以 `http://localhost:3005` 加上以下路徑即可存取。路徑大小寫請與表格一致。
+
+### 頁面路由
+
+| 路由 | 功能 | 對應檔案 |
+| --- | --- | --- |
+| `/` | 預設首頁、裝置方向感測測試 | [pages/index.js](pages/index.js) |
+| `/home` | 電影院首頁 | [pages/home.js](pages/home.js) |
+| `/cardGame` | 翻牌配對遊戲 | [pages/cardGame.js](pages/cardGame.js) |
+| `/logicQuestions` | 問答小遊戲 | [pages/logicQuestions.js](pages/logicQuestions.js) |
+| `/puzzleGame` | 數字拼圖遊戲 | [pages/puzzleGame.js](pages/puzzleGame.js) |
+| `/scratchoff` | 刮刮樂 | [pages/scratchoff.js](pages/scratchoff.js) |
+| `/intersectionObserver` | 元素進入視窗的觀察測試 | [pages/intersectionObserver.js](pages/intersectionObserver.js) |
+| `/reCAPTCHA` | Google reCAPTCHA 驗證測試，需設定 `RECAPTCHA_KEY` | [pages/reCAPTCHA.js](pages/reCAPTCHA.js) |
+| `/upload` | 讀取檔案並顯示文字內容 | [pages/upload.js](pages/upload.js) |
+| `/uploadFile` | XLSX／CSV 匯入與抽籤 | [pages/uploadFile.js](pages/uploadFile.js) |
+| `/uploadxlsx` | XLSX 匯入介面，抽籤功能尚未接上 | [pages/uploadxlsx.js](pages/uploadxlsx.js) |
+
+### API 路由
+
+| 路由 | 功能與狀態 | 對應檔案 |
+| --- | --- | --- |
+| `/api/hello` | 範例 API，回傳 `{ "name": "John Doe" }` | [pages/api/hello.js](pages/api/hello.js) |
+| `/api/filenames` | 取得翻牌遊戲圖片檔名，供 `/cardGame` 使用 | [pages/api/filenames.js](pages/api/filenames.js) |
+| `/api/readFile` | 檔案處理 API，尚未完成；目前未解析上傳檔案，直接讀取 `req.file.path` 可能造成錯誤 | [pages/api/readFile.js](pages/api/readFile.js) |
+
+### 共用路由設定
+
+- `pages/_app.js`：載入全域樣式與共用頁面設定，不提供獨立路由。
+- `pages/_document.js`：設定 HTML 文件結構，不提供獨立路由。
+- `app/layout.js`：目前沒有搭配 `page.js`，尚未提供 App Router 頁面。
+- 目前沒有 `[id]` 這類動態路由。
 
 ## Learn More
 

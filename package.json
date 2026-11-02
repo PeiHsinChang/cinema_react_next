@@ -2,12 +2,17 @@
   "name": "cinema_react",
   "version": "0.2.0",
   "private": true,
+  "description": "practice nextJS React",
   "engines": {
-    "node": ">16.2.0",
-    "npm": ">=9.5.1"
+    "node": ">=20.17.0",
+    "npm": ">=10.8.2"
   },
   "browser": {
     "crypto": false
+  },
+  "bugs": {
+    "url": "https://github.com/PeiHsinChang/cinema_react_next/issues",
+    "email": "zottycute@gmail.com"
   },
   "scripts": {
     "dev": "next dev -p 3005",
