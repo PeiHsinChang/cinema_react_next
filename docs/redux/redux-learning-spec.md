@@ -128,6 +128,8 @@ Redux 負責管理狀態；API 請求仍要另外撰寫。Redux 也不會自動�
 
 ### 第 4 課：使用 Redux Toolkit 整理
 
+學習筆記：[第 4 課：使用 createSlice](redux-lesson-04.md)。已改用自動產生的 actions，待學習者操作與回覆。
+
 把手寫 reducer 改成 createSlice，使用產生的 action creators。對照舊的 type 字串，說明 slice、payload，以及 Immer 為何允許在 slice reducer 裡寫看似直接修改的程式。
 
 完成條件：操作結果與上一課一致；能在 Redux DevTools（如已安裝）觀察 action 與狀態差異。未安裝擴充套件也能透過畫面和 getState 完成課程。

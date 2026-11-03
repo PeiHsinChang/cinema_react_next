@@ -1,19 +1,20 @@
 import { useDispatch, useSelector } from "react-redux";
+import { increment, decrement, reset } from "../../store/redux-learning/counter";
 
 export default function Counter() {
   const count = useSelector((state) => state.counter.value);
   const dispatch = useDispatch();
 
   function handleIncrement() {
-    dispatch({ type: "INCREMENT" });
+    dispatch(increment());
   }
 
   function handleDecrement() {
-    dispatch({ type: "DECREMENT" });
+    dispatch(decrement());
   }
 
   function handleReset() {
-    dispatch({ type: "RESET" });
+    dispatch(reset());
   }
 
   return (

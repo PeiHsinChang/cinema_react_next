@@ -79,6 +79,6 @@ Provider 提供管道、useDispatch 送事件、useSelector 讀取並訂閱資�
 - 如果只用 getState 讀值，是否已經讓 React 訂閱後續更新？
 - 按加一後，負責計算新值的是 onClick、Provider，還是 reducer？
 
-進度：已提供本課程式；待學習者操作並回覆後，再完成本課。下一課先學 createSlice，熟悉基礎後加入 TypeScript，最後處理跨頁與 SSR。
+進度：學習者已正確說明 useSelector 讀取資料、getState 不自動訂閱畫面更新，以及 reducer 負責計算新值。進入第 4 課 createSlice；接著加入 TypeScript，再處理跨頁與 SSR。此文保留第三課寫法，第四課起事件改為 createSlice 產生的名稱。
 
 參考：[React Redux hooks](https://redux.js.org/react-redux/api/hooks)、[Provider](https://redux.js.org/react-redux/api/provider)。
