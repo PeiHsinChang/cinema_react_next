@@ -148,6 +148,8 @@ Redux 負責管理狀態；API 請求仍要另外撰寫。Redux 也不會自動�
 
 ### 第 6 課：SSR 初始狀態交接
 
+學習筆記與操作步驟：[第 6 課：SSR 初始狀態交接](redux-lesson-06.md)。已提供固定資料 A/B 與手動 data hydration；瀏覽器驗證及理解題待完成。
+
 對應 ce8da1c 與 bc36304。先用固定的小筆假資料，在 getServerSideProps 建立當次請求的 store、dispatch 資料，再把 getState 結果放進 initialReduxState。\_app 以同一快照產生伺服器 HTML 與瀏覽器初次狀態。
 
 狀態分成 counter.value 與資料區 data（items、status、error）；SSR 僅更新 data，counter 不因 SSR 導覽而被覆蓋。完整載入時以 props 建立 store；瀏覽器換頁時以明確的 hydration action 合併新 data，缺少 initialReduxState 的頁面不重設 store。這是後續需實作與驗證的規則，不代表呼叫 configureStore(preloadedState) 就會自動完成換頁同步。
@@ -185,8 +187,8 @@ scientificName 與 taxonName 在本次回應中包含 HTML 標籤；初學版選
 - [V] 2：store/reducer 行為與型別正確。
 - [V] 3：兩個元件確實共用 Redux 狀態。
 - [V] 4：createSlice 改寫後行為不變。
-- [ ] 5：跨頁保留與重新整理重設符合規則。
-- [ ] 6：SSR 初始資料一致、請求隔離、換頁合併正確。
+- [V] 5：跨頁保留與重新整理重設符合規則。
+- [V] 6：SSR 初始資料一致、請求隔離、換頁合併正確。
 - [ ] 7：外部資料成功、空結果、失敗皆有結果。
 
 實作前先記錄目前 lint/build 基準；新增 Redux 後進行針對性的 reducer 驗證與瀏覽器操作，SSR 階段驗證完整載入及用戶端導覽兩條路徑。最後執行專案 lint/build；若既有問題阻擋，區分原有與新增問題並記錄，不自行擴大修改其他功能。

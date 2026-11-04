@@ -1,0 +1,21 @@
+import assert from "node:assert/strict";
+import { getLessonServerSideProps } from "../store/redux-learning/ssr.js";
+import { makeStore } from "../store/redux-learning/store.js";
+import { hydrateData } from "../store/redux-learning/data.js";
+import { increment } from "../store/redux-learning/counter.js";
+
+const a = getLessonServerSideProps({ query: {} }).props.initialReduxState;
+const b = getLessonServerSideProps({ query: { sample: "b" } }).props.initialReduxState;
+assert.equal(a.data.items[0].id, "A");
+assert.equal(b.data.items[0].id, "B");
+assert.notEqual(a.data, b.data);
+const browser = makeStore(JSON.parse(JSON.stringify(a)));
+assert.deepEqual(browser.getState(), a);
+for (let i = 0; i < 3; i++) browser.dispatch(increment());
+browser.dispatch(hydrateData(b.data));
+assert.equal(browser.getState().counter.value, 3);
+assert.deepEqual(browser.getState().data, b.data);
+assert.equal(a.counter.value, 0);
+assert.equal(makeStore(b).getState().counter.value, 0);
+assert.deepEqual(makeStore().getState().data.items, []);
+console.log("通過：請求隔離、可序列化快照、初始狀態一致、換頁只合併 data、重新載入歸零。");
