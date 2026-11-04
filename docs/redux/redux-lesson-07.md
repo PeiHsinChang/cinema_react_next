@@ -68,3 +68,20 @@ node --experimental-default-type=module scripts/redux-lesson-07.mjs
 來源：[TBN taxon API](https://www.tbn.org.tw/api/v26/taxon?name=%E6%94%80%E8%9C%A5)。
 
 實作驗證：第 6、7 課受控腳本通過；第 7 課 --live 真實請求通過（7 筆）；變更檔案 lint 與 git diff --check 通過。build 編譯成功，完整建置仍受既有 /reCAPTCHA 預先渲染的 RECAPTCHA_KEY 未定義問題阻擋。尚未執行瀏覽器 Link 導覽與 hydration 驗證。
+
+## 延伸：input 與 debounce
+
+現在首頁多了 [TaxonSearch.js](../../components/redux-learning/TaxonSearch.js)。輸入文字放在 useState，停止輸入 500 毫秒後才查詢。初次載入仍由 SSR 查詢「攀蜥」；之後的輸入透過站內 `/api/redux-learning/taxa?name=...` 查詢，站內 API 再呼叫 TBN。因此瀏覽器不直接連到 TBN，也不依賴上游 CORS。
+
+```text
+input → useState → 等 500ms → 站內 API → TBN
+→ dispatch(hydrateData(result)) → Redux 列表更新
+```
+
+每次繼續輸入或離開頁面，都會清除尚未執行的 timer 並取消前一次瀏覽器請求；版本編號另外阻擋過期回應寫入 Redux。伺服器已開始的上游請求可能仍會完成，但舊結果不會覆蓋新查詢。中文輸入法選字期間不發送請求，完成選字後才開始計時。
+
+空白會 trim；清空輸入立即清除結果，不呼叫 TBN。等待及查詢期間保留並標示上次結果，成功／查無資料／失敗仍沿用原本顯示；counter 不會被搜尋更新。輸入查詢不寫入 URL，重新整理首頁會回到 SSR 預設的「攀蜥」。摘要頁透過 Link 可讀取目前搜尋結果；返回首頁會重新取得預設查詢。
+
+操作檢查：快速輸入多個字，Network 應在停下 500ms 後才出現一次 taxa 請求；中文選字中不查詢。用慢速網路先查 A 再改 B，最後只能顯示 B 的結果。清空時列表清除，加到 3 的計數保持 3。
+
+實作驗證：腳本額外驗證自訂查詢、特殊字元編碼及空白不發送請求；debounce、中文選字與慢速網路互動需在瀏覽器操作驗證。

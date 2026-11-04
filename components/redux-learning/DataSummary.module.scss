@@ -1,0 +1,72 @@
+.summary {
+  width: 100%;
+  max-width: 960px;
+  margin: 24px 0;
+  padding: clamp(16px, 3vw, 28px);
+  border: 1px solid #dce5df;
+  border-radius: 16px;
+  background: #f6f9f7;
+  color: #20372b;
+  line-height: 1.6;
+
+  > h2 {
+    margin-bottom: 8px;
+    font-size: 1.25rem;
+  }
+
+  > p {
+    margin-bottom: 8px;
+    color: #52675a;
+    overflow-wrap: anywhere;
+  }
+}
+
+.list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+  gap: 12px;
+  margin: 20px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+  padding: 20px;
+  border: 1px solid #dce5df;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.cardHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.name {
+  min-width: 0;
+  font-size: 1.125rem;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.rank {
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: #eaf3ed;
+  color: #355f43;
+  font-size: 0.75rem;
+  overflow-wrap: anywhere;
+}
+
+.scientificName {
+  color: #65716a;
+  font-size: 0.9375rem;
+  overflow-wrap: anywhere;
+}

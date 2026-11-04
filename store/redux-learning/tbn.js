@@ -1,6 +1,7 @@
-export async function fetchTaxa(fetcher = fetch, timeoutMs = 10000) {
-  const query = "攀蜥";
+export async function fetchTaxa(fetcher = fetch, timeoutMs = 10000, name = "攀蜥") {
+  const query = typeof name === "string" ? name.trim() : "";
   const base = { items: [], total: 0, query, status: "failed", error: null };
+  if (!query) return { ...base, status: "idle" };
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), timeoutMs);
 

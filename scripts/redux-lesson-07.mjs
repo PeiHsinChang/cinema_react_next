@@ -3,9 +3,47 @@ import { fetchTaxa } from "../store/redux-learning/tbn.js";
 import { makeStore } from "../store/redux-learning/store.js";
 import { hydrateData } from "../store/redux-learning/data.js";
 import { increment } from "../store/redux-learning/counter.js";
+import taxaHandler from "../pages/api/redux-learning/taxa.js";
 
 const valid = { meta: { status: "SUCCESS", total: 1 }, data: [{ taxonUUID: "test-1", vernacularName: "測試分類", scientificName: "<i>unused</i>" }] };
 const mock = (body, ok = true) => async () => ({ ok, json: async () => body });
+let requestedUrl;
+const custom = await fetchTaxa(async (url) => {
+  requestedUrl = new URL(url);
+  return { ok: true, json: async () => valid };
+}, 10000, "  龍蜥 & test  ");
+assert.equal(requestedUrl.searchParams.get("name"), "龍蜥 & test");
+assert.equal(custom.query, "龍蜥 & test");
+const cleared = await fetchTaxa(async () => {
+  assert.fail("清空輸入不應呼叫上游 API");
+}, 10000, "  ");
+assert.equal(cleared.status, "idle");
+assert.deepEqual(cleared.items, []);
+const originalFetch = globalThis.fetch;
+async function request(method, name) {
+  const res = {
+    headers: {},
+    setHeader(key, value) { this.headers[key] = value; },
+    status(code) { this.code = code; return this; },
+    json(body) { this.body = body; return this; },
+  };
+  await taxaHandler({ method, query: { name } }, res);
+  return res;
+}
+try {
+  globalThis.fetch = mock(valid);
+  const api = await request("GET", "龍蜥");
+  assert.equal(api.code, 200);
+  assert.equal(api.body.query, "龍蜥");
+  assert.equal(api.headers["Cache-Control"], "no-store");
+  assert.equal((await request("POST", "龍蜥")).code, 405);
+  assert.equal((await request("GET", ["A", "B"])).code, 400);
+  assert.equal((await request("GET", undefined)).code, 400);
+  globalThis.fetch = mock(valid, false);
+  assert.equal((await request("GET", "龍蜥")).code, 502);
+} finally {
+  globalThis.fetch = originalFetch;
+}
 const success = await fetchTaxa(mock(valid));
 assert.equal(success.status, "succeeded");
 assert.equal(success.items[0].simplifiedScientificName, "未提供");
