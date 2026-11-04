@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const dataSlice = createSlice({
   name: "data",
-  initialState: { items: [], status: "idle", error: null },
+  initialState: { items: [], total: 0, query: "", status: "idle", error: null },
   reducers: {
     hydrateData(state, action) {
       return action.payload;

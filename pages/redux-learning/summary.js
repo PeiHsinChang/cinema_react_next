@@ -5,7 +5,7 @@ import CounterSummary from "../../components/redux-learning/CounterSummary";
 export default function ReduxLearningSummary() {
   return (
     <main>
-      <h1>第 6 課：跨頁摘要</h1>
+      <h1>第 7 課：跨頁摘要</h1>
       <p>這個頁面直接讀取同一份 Redux store 的 counter.value。</p>
       <CounterSummary />
       <DataSummary />
