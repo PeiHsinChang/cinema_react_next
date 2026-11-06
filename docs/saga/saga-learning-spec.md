@@ -1,6 +1,6 @@
 # Saga 獨立課程：逐步學習 Spec
 
-日期：2026-11-04。狀態：進入第 1 課語法練習，第 0 課責任分工仍待最後確認；尚未安裝 redux-saga 或改寫搜尋功能。
+日期：2026-11-04。狀態：進入第 2 課 middleware 練習；已安裝 redux-saga 1.5.1，尚未接入網站搜尋。
 
 ## 目標與方式
 
@@ -10,7 +10,7 @@
 
 每次只進行一課：說明一個主要觀念 → 預測結果 → 修改少量程式 → 操作驗證 → 回答理解題。每課結束停下，等學習者回覆才繼續。不一次交付完整 Saga 搜尋版本，遇到不熟悉的語法先獨立練習。
 
-目前提供第 0、1 課筆記與第 1 課獨立語法腳本。依賴在第 2 課才安裝；不自動 commit 或 push。
+目前提供第 0～2 課筆記與 scripts/saga/ 的獨立腳本。第 2 課已安裝 redux-saga 1.5.1；不自動 commit 或 push。
 
 ## 現有基準與最終範圍
 
@@ -82,8 +82,9 @@ Saga 是本次學習題材，不是 API 搜尋的必要依賴。Redux 官方通�
 - store/saga-learning/sagas.js：watcher、worker 與搜尋流程。
 - store/saga-learning/store.js：middleware 與任務啟動／停止。
 - components/saga-learning/TaxonSearch.js：保留輸入、選字與發送事件。
-- pages/\_app.js：瀏覽器任務生命週期與 SSR 資料交接。
-- scripts/saga-lesson-\*.mjs：依課程需要加入有意義的語法練習與流程測試。
+- pages/saga-learning/index.js：獨立路由與 SSR 初始資料。
+- components/saga-learning/SagaProvider.js：頁面範圍的 Provider、任務啟動與清理，不修改全站 _app.js。
+- scripts/saga/lesson-*.mjs：依課程需要加入有意義的語法練習與流程測試。
 - docs/saga/saga-lesson-\*.md：只在進入該課時新增筆記。
 
 命名與拆檔會隨實作調整；不預先產出所有課程的完成版。
